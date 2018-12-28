@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="OrdinaryPoi">
+
+    <resultMap type="OrdinaryPoi" id="OrdinaryPoiMap">
+        <result property="name" column="Name"/>
+        <result property="typeId" column="TypeID"/>
+        <result property="lon" column="Lon"/>
+        <result property="lat" column="Lat"/>
+        <result property="images" column="Images"/>
+        <result property="officialUrl" column="OfficialUrl"/>
+        <result property="summary" column="Summary"/>
+        <result property="no" column="No"/>
+        <result property="addr" column="Addr"/>
+        <result property="star" column="Star"/>
+    </resultMap>
+
+
+    <select id="getOrdinaryPoi" resultMap="OrdinaryPoiMap" parameterType="java.lang.Integer">
+        SELECT
+            NAME,
+            TypeID,
+            Lon,
+            Lat,
+            Images,
+            OfficialUrl,
+            Summary,
+            No,
+            Addr,
+            Star
+        FROM
+            tbl_ordinaryPoi
+        WHERE
+        1 = 1
+    </select>
+
+    <insert id="insertList" parameterType="java.util.HashMap">
+        INSERT INTO tbl_ordinaryPoi(No,Name,TypeID,Star,Addr,Tel,Lon,Lat,Images,OfficialUrl,Summary)
+        VALUES
+        <foreach collection="list" item="ordinaryPoi" separator=",">
+            (#{ordinaryPoi.no},#{ordinaryPoi.name},#{ordinaryPoi.typeId},#{ordinaryPoi.star},#{ordinaryPoi.addr},#{ordinaryPoi.tel},#{ordinaryPoi.lon},#{ordinaryPoi.lat},#{ordinaryPoi.images},#{ordinaryPoi.officialUrl},#{ordinaryPoi.summary})
+        </foreach>
+    </insert>
+
+</mapper>

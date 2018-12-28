@@ -1,0 +1,32 @@
+@font-face {
+    font-family: 'iconfont';  /* project id 588478 */
+    src: url('//at.alicdn.com/t/font_588478_cg2hoasjpjtyy14i.eot');
+    src: url('//at.alicdn.com/t/font_588478_cg2hoasjpjtyy14i.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_588478_cg2hoasjpjtyy14i.woff') format('woff'),
+    url('//at.alicdn.com/t/font_588478_cg2hoasjpjtyy14i.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_588478_cg2hoasjpjtyy14i.svg#iconfont') format('svg');
+}
+
+.news_search{ padding:10px 10px; }
+.news_search .layui-inline{ margin:5px 5px 5px 0; }
+.layui-table,.layui-table th{ text-align:center; }
+.layui-table th{ color:#333;font-size: 15px; }
+.news_list .layui-btn,.news_list .layui-btn+.layui-btn{ margin:2px 5px; }
+.news_list .layui-form-switch{ margin-top:0; }
+
+/*分页*/
+#page{ text-align:right; }
+.closeTab{margin-left: calc(100% - 40px);margin-top: -30px;cursor: pointer;}
+
+.layui-table-cell {height: 38px !important;line-height: 38px !important;}
+/*.disLayer{padding:10px;}
+.disLayer span{display:flex;height:25px;line-height:25px;border-bottom:1px solid #ccc}
+.disLayer image{width:100px;height:100px;margin-top:10px;}*/
+
+/*html{background: #f6f6f6;}*/
+/*body{margin:10px;box-shadow: 0px 1px 0px #ccc;}*/
+.listPage{padding:10px 20px}
+/*.layui-table-view {width: calc(100% - 40px);margin-left: 20px;}*/
+.layui-table-box, .layui-table-view {background:#fff}
+.layui-tab-item {background-color: #f3f3f4;}
+.layui-table thead tr{border-top: 4px solid #e7eaec;background-color: #f2f2f2;}

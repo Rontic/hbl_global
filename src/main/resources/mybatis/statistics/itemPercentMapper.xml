@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ItemPercent">
+
+    <resultMap type="ItemPercent" id="ItemPercentMap">
+        <result property="statisticsId" column="statistics_id"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="itemAmount" column="item_amount"/>
+        <result property="dataYear" column="data_year"/>
+        <result property="userId" column="user_id"/>
+        <result property="statisticType" column="statistic_type"/>
+    </resultMap>
+
+
+    <insert id="saveItemPercents" parameterType="java.util.HashMap">
+        INSERT INTO tbl_item_percent(statistics_id,year_amount,item_amount,data_year,user_id,statistic_type)
+        VALUES
+        <foreach collection="itemPercents" item="itemPercent" separator=",">
+            (#{itemPercent.statisticsId},#{itemPercent.yearAmount},#{itemPercent.itemAmount},#{itemPercent.dataYear},#{itemPercent.userId},#{itemPercent.statisticType})
+        </foreach>
+    </insert>
+
+    <select id="getItemPercentList" parameterType="java.util.HashMap" resultMap="ItemPercentMap">
+        SELECT * FROM
+          tbl_item_percent
+        WHERE
+          module_id = #{moduleId}
+        AND
+          user_id = #{userId}
+    </select>
+
+</mapper>

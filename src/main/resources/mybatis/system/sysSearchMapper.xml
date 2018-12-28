@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SysSearch">
+    <resultMap type="java.util.HashMap" id="sysModuleMap">
+        <result property="moduleTitle" column="moduleName"/>
+        <result property="moduleId" column="module_id"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+    <select id="searchModuleCount" parameterType="java.util.HashMap" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM
+        (
+              SELECT
+                `name` moduleName,
+                food_id module_id,
+                NULL type
+            FROM
+                tbl_food
+            WHERE
+                `name` LIKE '%${name}%'
+        UNION
+            SELECT
+                `name` moduleName,
+                restaurant_id module_id,
+                NULL type
+            FROM
+                tbl_restaurant
+            WHERE
+                `name` LIKE '%${name}%'
+            AND review_flg != 0
+        UNION
+            SELECT
+                `name` moduleName,
+                hotel_id module_id,
+                NULL type
+            FROM
+                tbl_hotel
+            WHERE
+                `name` LIKE '%${name}%'
+            AND review_flg != 0
+        UNION
+            SELECT
+                `name` moduleName,
+                scenic_id module_id,
+                NULL type
+            FROM
+                tbl_scenic
+            WHERE
+                `name` LIKE '%${name}%'
+            AND review_flg != 0
+        UNION
+            SELECT
+                `name` moduleName,
+                specialty_id module_id,
+                NULL type
+            FROM
+                tbl_specialty
+            WHERE
+                `name` LIKE '%${name}%'
+        UNION
+            SELECT
+                `name` moduleName,
+                shop_id module_id,
+                NULL type
+            FROM
+                tbl_shop
+            WHERE
+                `name` LIKE '%${name}%'
+            AND review_flg != 0
+        UNION
+            SELECT
+                `name` moduleName,
+                entertainment_id module_id,
+                NULL type
+            FROM
+                tbl_entertainment
+            WHERE
+                `name` LIKE '%${name}%'
+            AND review_flg != 0
+            <if test ="type == 'ec' ">
+                UNION
+                    SELECT
+                        title moduleName,
+                        law_id module_id,
+                        type type
+                    FROM
+                        tbl_law
+                    WHERE
+                        title LIKE '%${name}%'
+                UNION
+                    SELECT
+                      name moduleName,
+                      person_id module_id,
+                      NULL type
+                    FROM
+                      tbl_person
+                    WHERE
+                      name LIKE '%${name}%'
+                UNION
+                    SELECT
+                      title moduleName,
+                      culture_id module_id,
+                      type type
+                    FROM
+                      tbl_culture
+                    WHERE
+                      title LIKE '%${name}%'
+                UNION
+                    SELECT
+                      name moduleName,
+                      image_id module_id,
+                      NULL type
+                    FROM
+                      tbl_image
+                    WHERE
+                      name LIKE '%${name}%'
+                UNION
+                    SELECT
+                      name moduleName,
+                      video_id module_id,
+                      NULL type
+                    FROM
+                      tbl_video
+                    WHERE
+                      name LIKE '%${name}%'
+            </if>
+
+        UNION
+            SELECT
+                event_title moduleName,
+                event_id module_id,
+                NULL type
+            FROM
+                tbl_event
+            WHERE
+                event_title LIKE '%${name}%'
+        UNION
+            SELECT
+                `name` moduleName,
+                line_id module_id,
+                NULL type
+            FROM
+                tbl_travel_line
+            WHERE
+                `name` LIKE '%${name}%'
+        )result
+    </select>
+
+    <select id="searchModule" parameterType="java.util.HashMap" resultMap="sysModuleMap">
+        SELECT
+            `name` moduleName,
+            food_id module_id,
+            NULL type
+        FROM
+            tbl_food
+        WHERE
+            `name` LIKE '%${name}%'
+    UNION
+        SELECT
+            `name` moduleName,
+            restaurant_id module_id,
+            NULL type
+        FROM
+            tbl_restaurant
+        WHERE
+            `name` LIKE '%${name}%'
+        AND review_flg != 0
+	UNION
+		SELECT
+			`name` moduleName,
+			hotel_id module_id,
+			NULL type
+		FROM
+			tbl_hotel
+		WHERE
+			`name` LIKE '%${name}%'
+		AND review_flg != 0
+	UNION
+        SELECT
+            `name` moduleName,
+            scenic_id module_id,
+            NULL type
+        FROM
+            tbl_scenic
+        WHERE
+            `name` LIKE '%${name}%'
+        AND review_flg != 0
+    UNION
+        SELECT
+            `name` moduleName,
+            specialty_id module_id,
+            NULL type
+        FROM
+            tbl_specialty
+        WHERE
+            `name` LIKE '%${name}%'
+    UNION
+        SELECT
+            `name` moduleName,
+            shop_id module_id,
+            NULL type
+        FROM
+            tbl_shop
+        WHERE
+            `name` LIKE '%${name}%'
+        AND review_flg != 0
+    UNION
+        SELECT
+            `name` moduleName,
+            entertainment_id module_id,
+            NULL type
+        FROM
+            tbl_entertainment
+        WHERE
+            `name` LIKE '%${name}%'
+        AND review_flg != 0
+        <if test ="type == 'ec'">
+            UNION
+                SELECT
+                  title moduleName,
+                  law_id module_id,
+                  type type
+                FROM
+                  tbl_law
+                WHERE
+                  title LIKE '%${name}%'
+            UNION
+                SELECT
+                  name moduleName,
+                  person_id module_id,
+                  NULL type
+                FROM
+                  tbl_person
+                WHERE
+                  name LIKE '%${name}%'
+            UNION
+                SELECT
+                  title moduleName,
+                  culture_id module_id,
+                  type type
+                FROM
+                  tbl_culture
+                WHERE
+                  title LIKE '%${name}%'
+            UNION
+                SELECT
+                  name moduleName,
+                  image_id module_id,
+                  NULL type
+                FROM
+                  tbl_image
+                WHERE
+                  name LIKE '%${name}%'
+            UNION
+                SELECT
+                  name moduleName,
+                  video_id module_id,
+                  NULL type
+                FROM
+                  tbl_video
+                WHERE
+                  name LIKE '%${name}%'
+        </if>
+
+        UNION
+        SELECT
+            event_title moduleName,
+            event_id module_id,
+            NULL type
+        FROM
+            tbl_event
+        WHERE
+            event_title LIKE '%${name}%'
+    UNION
+        SELECT
+            `name` moduleName,
+            line_id module_id,
+            NULL type
+        FROM
+            tbl_travel_line
+        WHERE
+            `name` LIKE '%${name}%'
+    </select>
+</mapper>

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysModule">
+	<resultMap type="SysModule" id="SysModuleMap">
+	  <result property="moduleId" column="module_id"/>
+	  <result property="parentId" column="parent_id"/>
+	  <result property="fullIndex" column="full_index"/>
+	  <result property="moduleName" column="module_name"/>
+	  <result property="moduleLevel" column="module_level"/>
+	  <result property="isLeaf" column="is_leaf"/>
+	  <result property="moduleIcon" column="module_icon"/>
+	  <result property="moduleOrder" column="module_order"/>
+	  <result property="moduleRemark" column="module_remark"/>
+	  <result property="moduleUrl" column="module_url"/>
+	  <result property="delFlg" column="del_flg"/>
+	  <result property="createTime" column="create_time"/>
+	  <result property="createUser" column="create_user"/>
+	  <result property="updateTime" column="update_time"/>
+	  <result property="updateUser" column="update_user"/>
+	</resultMap>
+
+	<resultMap id="BaseModuleMap" type="BaseModule">
+        <result property="moduleId" column="module_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="moduleName" column="module_name"/>
+		<result property="totalPoint" column="total_point"/>
+		<result property="realPoint" column="real_point"/>
+	</resultMap>
+
+    <resultMap id="mainMap" type="java.util.HashMap">
+        <result property="moduleId" column="moduleId"/>
+        <result property="itemNum" column="itemNum"/>
+        <result property="moduleName" column="module_name"/>
+        <result property="totalPoint" column="totalPoint"/>
+        <result property="realPoint" column="realPoint"/>
+    </resultMap>
+
+	<!--通过权限信息查询模块信息  -->
+	<select id="getModuleListByPermissIds" parameterType="SysPermiss" resultMap="SysModuleMap">
+		select * from tbl_sys_module t1 where t1.module_id in 
+		(select t2.module_id from tbl_sys_permission t2 
+		 <if test="permissionIds !=null and permissionIds != ''">
+			where t2.permission_id in
+			<foreach collection="permissionIds" item="item" open="(" close=")" separator=",">
+				#{item}
+		    </foreach>
+	    </if>
+		)union
+		select * from tbl_sys_module t where t.module_id in 
+		(select t1.parent_id from tbl_sys_module t1 where t1.module_id in 
+		(select t2.module_id from tbl_sys_permission t2 
+		<if test="permissionIds !=null and permissionIds != ''">
+			where t2.permission_id in
+			<foreach collection="permissionIds" item="item" open="(" close=")" separator=",">
+				#{item}
+		    </foreach>
+		</if>
+		) and t.module_level=0)
+	</select>
+
+	<select id="getItemList" resultMap="BaseModuleMap" parameterType="java.lang.String">
+		SELECT * FROM
+		  tbl_base_module
+		WHERE
+		  parent_id = #{parentId}
+	</select>
+
+	<update id="editPoint" parameterType="BaseModule">
+		UPDATE tbl_base_module
+		SET
+		  real_point = #{realPoint}
+		WHERE
+		  module_id = #{moduleId}
+	</update>
+
+    <select id="getMainData" resultMap="mainMap">
+        SELECT
+            t1.module_id moduleId,
+            t1.module_name module_name,
+            COUNT( t2.module_id ) itemNum,
+            SUM( t2.real_point ) realPoint,
+            SUM( t2.total_point ) totalPoint
+        FROM
+            tbl_base_module t1
+            LEFT JOIN tbl_base_module t2 ON t1.module_id = t2.parent_id
+        WHERE
+            t1.parent_id = 0
+        GROUP BY
+            t1.module_id
+        ORDER BY
+            t1.module_id
+    </select>
+</mapper>

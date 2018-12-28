@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysRole">
+
+	<resultMap type="SysRole" id="SysRoleMap">
+	  <result property="roleId" column="role_id"/>
+	  <result property="roleOrder" column="role_order"/>
+	  <result property="roleName" column="role_name"/>
+	  <result property="roleType" column="role_type"/>
+	  <result property="memberStatus" column="member_status"/>
+	  <result property="roleRemark" column="role_remark"/>
+	  <result property="delFlg" column="del_flg"/>
+	  <result property="createTime" column="create_time"/>
+	  <result property="createUser" column="create_user"/>
+	  <result property="updateTime" column="update_time"/>
+	  <result property="updateUser" column="update_user"/>
+	</resultMap>
+	
+	<resultMap type="SysPermiss" id="SysPermissMap">
+	  <result property="permissionId" column="permission_id"/>
+	  <result property="moduleId" column="module_id"/>
+	  <result property="moduleName" column="module_name"/>
+	  <result property="permissionName" column="permission_name"/>
+	  <result property="permissionType" column="permission_type"/>
+	  <result property="permissionRemark" column="permission_remark"/>
+	  <result property="permissionUrl" column="permission_url"/>
+	  <result property="delFlg" column="del_flg"/>
+	  <result property="createTime" column="create_time"/>
+	  <result property="createUser" column="create_user"/>
+	  <result property="updateTime" column="update_time"/>
+	  <result property="updateUser" column="update_user"/>
+	</resultMap>
+	
+	<resultMap type="SysModule" id="SysModuleMap">
+	  <result property="moduleId" column="module_id"/>
+	  <result property="parentId" column="parent_id"/>
+	  <result property="fullIndex" column="full_index"/>
+	  <result property="moduleName" column="module_name"/>
+	  <result property="moduleType" column="module_type"/>
+	  <result property="moduleLevel" column="module_level"/>
+	  <result property="isLeaf" column="is_leaf"/>
+	  <result property="moduleIcon" column="module_icon"/>
+	  <result property="moduleOrder" column="module_order"/>
+	  <result property="moduleRemark" column="module_remark"/>
+	  <result property="moduleUrl" column="module_url"/>
+	  <result property="delFlg" column="del_flg"/>
+	  <result property="createTime" column="create_time"/>
+	  <result property="createUser" column="create_user"/>
+	  <result property="updateTime" column="update_time"/>
+	  <result property="updateUser" column="update_user"/>
+	</resultMap>
+	
+	
+	
+	
+	<!-- 得到角色的数量-->
+	<select id="getSysRoleCount" parameterType="SysRole" resultType="java.lang.Integer">
+	  select count(*) from tbl_sys_role
+	  <where>  
+	  <if test="roleId !=null and roleId != ''">
+	     and tbl_sys_role.role_id=#{roleId}
+	  </if>
+	  <if test="roleOrder !=null and roleOrder != ''">
+	     and tbl_sys_role.role_order=#{roleOrder}
+	  </if>
+	  <if test="roleName !=null and roleName != ''">
+	     and tbl_sys_role.role_name=#{roleName}
+	  </if>
+	  <if test="roleType !=null and roleType != ''">
+	     and tbl_sys_role.role_type=#{roleType}
+	  </if>
+	  <if test="roleRemark !=null and roleRemark != ''">
+	     and tbl_sys_role.role_remark=#{roleRemark}
+	  </if>
+	  <if test="delFlg !=null and delFlg != ''">
+	     and tbl_sys_role.del_flg=#{delFlg}
+	  </if>
+	  <if test="createTime !=null and createTime != ''">
+	     and tbl_sys_role.create_time=#{createTime}
+	  </if>
+	  <if test="createUser !=null and createUser != ''">
+	     and tbl_sys_role.create_user=#{createUser}
+	  </if>
+	  <if test="updateTime !=null and updateTime != ''">
+	     and tbl_sys_role.update_time=#{updateTime}
+	  </if>
+	  <if test="updateUser !=null and updateUser != ''">
+	     and tbl_sys_role.update_user=#{updateUser}
+	  </if>
+	  </where>
+	  order by role_id desc
+	</select>
+	
+	<!-- 得到所有角色信息-->
+	<select id="findSysRole" parameterType="SysRole" resultMap="SysRoleMap">
+	  select tbl_sys_role.role_id,tbl_sys_role.role_order,tbl_sys_role.role_name,tbl_sys_role.role_remark,tbl_sys_role.del_flg,tbl_sys_role.create_time,tbl_sys_role.create_user,tbl_sys_role.update_time,tbl_sys_role.update_user from tbl_sys_role
+	  <where>  
+	  <if test="roleId !=null and roleId != ''">
+	     and tbl_sys_role.role_id=#{roleId}
+	  </if>
+	  <if test="roleOrder !=null and roleOrder != ''">
+	     and tbl_sys_role.role_order=#{roleOrder}
+	  </if>
+	  <if test="roleName !=null and roleName != ''">
+	     and tbl_sys_role.role_name=#{roleName}
+	  </if>
+	  <if test="roleType !=null and roleType != ''">
+	     and tbl_sys_role.role_type=#{roleType}
+	  </if>
+	  <if test="roleRemark !=null and roleRemark != ''">
+	     and tbl_sys_role.role_remark=#{roleRemark}
+	  </if>
+	  <if test="delFlg !=null and delFlg != ''">
+	     and tbl_sys_role.del_flg=#{delFlg}
+	  </if>
+	  <if test="createTime !=null and createTime != ''">
+	     and tbl_sys_role.create_time=#{createTime}
+	  </if>
+	  <if test="createUser !=null and createUser != ''">
+	     and tbl_sys_role.create_user=#{createUser}
+	  </if>
+	  <if test="updateTime !=null and updateTime != ''">
+	     and tbl_sys_role.update_time=#{updateTime}
+	  </if>
+	  <if test="updateUser !=null and updateUser != ''">
+	     and tbl_sys_role.update_user=#{updateUser}
+	  </if>
+	  </where>
+	  order by role_id desc
+	</select>
+	
+	<!-- 保存角色信息-->
+	<insert id="saveSysRole" parameterType="SysRole" >
+	insert into tbl_sys_role (role_id,role_order,role_name,role_type,role_remark,del_flg,create_time,create_user,update_time,update_user)
+	 values 
+	(#{roleId},#{roleOrder},#{roleName},#{roleType},#{roleRemark},#{delFlg},now(),#{createUser},now(),#{updateUser})
+	</insert>
+	
+	<!-- 修改角色信息-->
+	<update id="updateSysRole" parameterType="SysRole" >
+	  update tbl_sys_role
+	 <set> 
+	  <if test="roleId != null">role_id=#{roleId},</if>
+	  <if test="roleOrder != null">role_order=#{roleOrder},</if>
+	  <if test="roleName != null">role_name=#{roleName},</if>
+	  <if test="roleType != null">role_type=#{roleType},</if>
+	  <if test="roleRemark != null">role_remark=#{roleRemark},</if>
+	  <if test="delFlg != null">del_flg=#{delFlg},</if>
+	  <if test="createTime != null">create_time=now(),</if>
+	  <if test="createUser != null">create_user=#{createUser},</if>
+	  <if test="updateTime != null">update_time=now(),</if>
+	  <if test="updateUser != null">update_user=#{updateUser},</if>
+	</set>
+	  where 1=1 and role_id=#{roleId} 
+	</update>
+	
+	<!-- 删除角色信息-->
+	<delete id="deleteSysRole" parameterType="SysRole" >
+	  delete tbl_sys_role  where 1=1 and role_id=#{roleId} 
+	</delete>
+	
+	<!-- 根据roleId删除权限信息-->
+	<delete id="deleteRolePermissionByRoleIs" parameterType="java.lang.String" >
+	  delete from tbl_sys_role_permission  where 1=1 and role_id=#{roleId} 
+	</delete>
+	
+	<!-- 通过角色得到权限信息-->
+	<select id="getSysPermissByRoleId" parameterType="SysRole" resultMap="SysPermissMap">
+	  select * from tbl_sys_permission t1,tbl_sys_role_permission t2 where t1.permission_id = t2.permission_id 
+	  and t2.role_id = #{roleId}
+	</select>
+	
+	<!-- 通过角色得到权限信息-->
+	<select id="getSysPermissIdsByRoleId" parameterType="java.lang.String" resultType="java.lang.String">
+	  select t1.permission_id  from tbl_sys_role_permission t1 where t1.role_id=#{roleId}
+	</select>
+	
+	<!-- 取得所有权限信息-->
+	<select id="getSysPermiss" parameterType="SysRole" resultMap="SysPermissMap">
+	  select t1.*, t2.module_name from tbl_sys_permission t1,tbl_sys_module t2 where t1.module_id = t2.module_id and t1.permission_type = '1' 
+	</select>
+	
+	<!-- 取得所有moduleId说信息-->
+	<select id="getSysModuleIds"   resultMap="SysModuleMap">
+	  select DISTINCT t1.module_id, t2.module_name from tbl_sys_permission t1,tbl_sys_module t2 where t1.module_id = t2.module_id and t2.module_type ='1'
+	</select>
+	
+	<!-- 获取所有角色信息数量-->
+	<select id="getRoleCounts" parameterType="SysRole" resultType="java.lang.Integer">
+		select count(*) from tbl_sys_role
+		<where>
+			<if test="roleName != null and roleName != ''">and role_name like '%${roleName}%'</if>
+			<if test="roleType != null and roleType != ''">and role_type =  #{roleType}</if>
+			<if test="roleOrder != null and roleOrder != ''">and role_order like '%${roleOrder}%'</if>
+			<if test="delFlg != null and delFlg != ''">and del_flg = #{delFlg}</if>
+			<if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
+		</where>
+        order by role_order
+	</select>
+	
+	<!-- 获取所有角色信息-->
+	<select id="getRoles" parameterType="SysRole" resultMap="SysRoleMap">
+		select * from tbl_sys_role
+		<where>
+			<if test="roleName != null and roleName != ''">and role_name like '%${roleName}%'</if>
+			<if test="roleType != null and roleType != ''">and role_type =  #{roleType}</if>
+			<if test="roleOrder != null and roleOrder != ''">and role_order like '%${roleOrder}%'</if>
+			<if test="delFlg != null and delFlg != ''">and del_flg = #{delFlg}</if>
+			<if test="roleId != null and roleId != ''">and role_id = #{roleId}</if>
+		</where>
+		order by role_order
+	</select>
+	
+	<!-- 获取所有角色信息-->
+	<select id="getAllRoles" resultMap="SysRoleMap" parameterType="String">
+		select * from tbl_sys_role where  del_flg='0' 
+		and role_type = #{roleType}
+		order by role_order
+	</select>
+	
+	<!-- 获取所有角色信息数量-->
+	<select id="getAllRolesCount" resultType="java.lang.Integer" parameterType="String">
+		select count(*) from tbl_sys_role where del_flg='0'  order by role_order
+	</select>
+	
+	<!-- 查询角色信息数-->
+	<select id="getRoleByRoleOrder" parameterType="SysRole" resultType="Integer">
+		select count(*) from tbl_sys_role where   del_flg ='0' and role_type='1' and role_id!=#{roleId} and ( role_order = #{roleOrder}  or role_name  = #{roleName})
+	</select>
+	
+	<!-- 查询重复角色信息数-->
+	<select id="getRepeatRoleByRoleOrder" parameterType="SysRole" resultType="Integer">
+		select count(*) from tbl_sys_role where  del_flg ='0' and role_type='1' and ( role_order = #{roleOrder} or role_name  = #{roleName} )
+	</select>
+	
+	<!-- 修改角色信息-->
+	<update id="updateRole" parameterType="SysRole">
+		update tbl_sys_role
+		<set>
+			<if test="roleOrder != null">role_order = #{roleOrder},</if>
+			<if test="roleName != null">role_name = #{roleName},</if>
+			<if test="roleType != null">role_type = #{roleType},</if>
+			<if test="updateTime != null">update_time = now(),</if>
+			<if test="updateUser != null">update_user = #{updateUser},</if>
+		</set>
+		where role_id=#{roleId}
+	</update>
+	
+	
+	
+	
+	<!-- 保存角色权限信息-->
+	<insert id="saveRolePermission" parameterType="java.util.List" >
+	insert into tbl_sys_role_permission (role_id,permission_id,del_flg)
+	values 
+	<foreach collection="list" item="item" separator=",">
+		(#{item.roleId}, #{item.permissionId}, #{item.delFlg})
+	</foreach>
+	</insert>
+	
+	<!-- 增加角色权限信息-->
+	<insert id="saveRole" parameterType="SysRole">
+		insert into tbl_sys_role (role_id,role_order, role_name,role_type, del_flg, create_time, create_user,
+		update_time, update_user)
+		values ( #{roleId}, #{roleOrder},#{roleName}, #{roleType},#{delFlg},
+		now(), #{createUser}, now(), #{updateUser})
+	</insert>
+	
+	<!-- 逻辑删除角色信息-->
+	<update id="logicMultiDeleteRole" parameterType="SysRole">
+		update tbl_sys_role set del_flg='1',update_user=#{updateUser},update_time=now() where role_id in
+		<foreach collection="roleIds" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</update>
+	
+	
+</mapper>

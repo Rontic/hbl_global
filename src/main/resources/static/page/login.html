@@ -1,0 +1,94 @@
+<!DOCTYPE HTML>
+<html>
+<head> 
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>全域旅游系统</title>
+        <link rel="stylesheet" href="/css/login/reset.css">
+        <link rel="stylesheet" href="/css/login/supersized.css">
+        <link rel="stylesheet" href="/css/login/style.css">
+    <style>
+        .error{
+            width: auto;
+            line-height: 36px;
+            margin: 0 -114px;
+        }
+
+    </style>
+</head>
+<body>
+        <div class="page-container">
+            <h1 style="color:white">全&nbsp;域&nbsp;旅&nbsp;游&nbsp;成&nbsp;果&nbsp;展&nbsp;示&nbsp;平&nbsp;台</h1>
+            <form action="" method="post" id="loginDto" style="top:-210px;background:#35626E">
+                <input type="text" id="userId" name="userId" onKeyDown="doLogin(event)" class="username" placeholder="请输入登录账号">
+                <input type="password" name="password" onKeyDown="doLogin(event)" id="password" class="password" placeholder="请输入登录密码">
+                <input type="text" id="keyword" onKeyDown="doLogin(event)" name="keyword" class="keyword" style="width:150px;" placeholder="请输入验证码"><img id="imgCode" src="/login/keyword.do" onclick="refresh();" />
+                <button type="button" onclick="login()">登&nbsp;陆</button>
+                 <div class="error"><span>+</span></div> 
+            </form>
+            <!-- <div class="error"><span>+</span></div> -->
+        </div>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/login/supersized.3.2.7.min.js"></script>
+        <script src="/js/login/supersized-init.js"></script>
+        <script src="/js/login/scripts.js"></script>
+		<script> 
+			$("#loginDto").stop(true, false).animate({"top":0}, 1000,"linear");
+		</script>
+		<script>
+	function refresh()
+	{
+		document.getElementById("imgCode").src='/login/keyword.do?a='+Math.random()+100;
+	}
+	
+	function doLogin(e)
+	{
+		var keynum;
+        if(window.event){//IE
+			keynum = e.keyCode;
+		}else if(e.which){// Netscape/Firefox/Opera
+			keynum = e.which;
+		}
+		if(keynum == 13){
+			login();	
+		}
+	}
+	
+	function login()
+	{	
+        var userinfo = $("#loginDto").serialize();    
+        $.ajax({
+			type : "POST",
+			url : "/login/checkAuth.do",
+			data : userinfo,
+			success : function(data){
+				if (data.success){
+					window.location.href="/page/index.html";
+				}else{
+					$(".error").text(data.msg);
+					$(".error").css("display","block");
+					refresh();
+				}
+					
+			}
+		});	
+	} 
+	
+    	function redirect(){
+    		var url = "/page/index.html";
+    		var args= "fullscreen=yes,z-look=yes,location=no,top=0,left=0,width="+screen.width+",height="+screen.height;
+    		window.open(url,"",args);
+    		var sAgent = navigator.userAgent.toLowerCase();
+    		var isIE = (sAgent.indexOf("msie")!=-1);   
+    		if(isIE){
+    			window.opener=null;
+        		window.open("","_self");    
+        		window.close();	
+    		}else{
+    			window.location.reload(); 
+    		}
+    		
+    	}	
+</script>
+</body>
+</html>

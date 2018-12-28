@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysUser">
+	<resultMap type="SysUser" id="SysUserMap">
+        <result property="userId" column="user_id"/>
+        <result property="password" column="password"/>
+        <result property="userName" column="user_name"/>
+        <result property="userRemark" column="user_remark"/>
+        <result property="userSex" column="user_sex"/>
+        <result property="userMobile" column="user_mobile"/>
+        <result property="userTel" column="user_tel"/>
+        <result property="userEmail" column="user_email"/>
+        <result property="roleIds" column="role_id"/>
+        <result property="delFlg" column="del_flg"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createUser" column="create_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateUser" column="update_user"/>
+		<result property="cityId" column="city_id"/>
+	</resultMap>
+	
+	<resultMap type="SysRole" id="SysRoleMap" >
+	  <result property="roleId" column="role_id"/>
+	  <result property="roleOrder" column="role_order"/>
+	  <result property="roleName" column="role_name"/>
+	  <result property="roleRemark" column="role_remark"/>
+	  <result property="delFlg" column="del_flg"/>
+	  <result property="createTime" column="create_time"/>
+	  <result property="createUser" column="create_user"/>
+	  <result property="updateTime" column="update_time"/>
+	  <result property="updateUser" column="update_user"/>
+	</resultMap>
+	
+	<resultMap type="SysPermiss" id="SysPermissMap">
+	  <result property="permissionId" column="permission_id"/>
+	  <result property="moduleId" column="module_id"/>
+	  <result property="permissionName" column="permission_name"/>
+	  <result property="permissionRemark" column="permission_remark"/>
+	  <result property="permissionUrl" column="permission_url"/>
+	  <result property="delFlg" column="del_flg"/>
+	  <result property="createTime" column="create_time"/>
+	  <result property="createUser" column="create_user"/>
+	  <result property="updateTime" column="update_time"/>
+	  <result property="updateUser" column="update_user"/>
+	</resultMap>
+	
+	<!--查询用户数量  -->
+	<select id="getSysUserCount" parameterType="SysUser" resultType="java.lang.Integer">
+	  select count(*) from tbl_sys_user
+	  <where>  
+	  <if test="userId !=null and userId != ''">
+	     and tbl_sys_user.user_id=#{userId}
+	  </if>
+	  <if test="password !=null and password != ''">
+	     and tbl_sys_user.password=#{password}
+	  </if>
+	  <if test="userName !=null and userName != ''">
+	     and tbl_sys_user.user_name like '%${userName}%'
+	  </if>
+	  <if test="userRemark !=null and userRemark != ''">
+	     and tbl_sys_user.user_remark=#{userRemark}
+	  </if>
+	  <if test="userSex !=null and userSex != ''">
+	     and tbl_sys_user.user_sex=#{userSex}
+	  </if>
+	  <if test="userMobile !=null and userMobile != ''">
+	     and tbl_sys_user.user_mobile=#{userMobile}
+	  </if>
+	  <if test="userTel !=null and userTel != ''">
+	     and tbl_sys_user.user_tel=#{userTel}
+	  </if>
+	  <if test="userEmail !=null and userEmail != ''">
+	     and tbl_sys_user.user_email=#{userEmail}
+	  </if>
+	  <if test="delFlg !=null and delFlg != ''">
+	     and tbl_sys_user.del_flg=#{delFlg}
+	  </if>
+	  <if test="createTime !=null and createTime != ''">
+	     and tbl_sys_user.create_time=#{createTime}
+	  </if>
+	  <if test="createUser !=null and createUser != ''">
+	     and tbl_sys_user.create_user=#{createUser}
+	  </if>
+	  <if test="updateTime !=null and updateTime != ''">
+	     and tbl_sys_user.update_time=#{updateTime}
+	  </if>
+	  <if test="updateUser !=null and updateUser != ''">
+	     and tbl_sys_user.update_user=#{updateUser}
+	  </if>
+	  </where>
+	</select>
+	
+	<!--查询用户信息  -->
+	<select id="findSysUser" parameterType="SysUser" resultMap="SysUserMap">
+	  select * from
+		tbl_sys_user
+	  <where>
+		  <if test="userId !=null and userId != ''">
+			 and tbl_sys_user.user_id=#{userId}
+		  </if>
+		  <if test="password !=null and password != ''">
+			 and tbl_sys_user.password=#{password}
+		  </if>
+		  <if test="userName !=null and userName != ''">
+			 and tbl_sys_user.user_name like '%${userName}%'
+		  </if>
+		  <if test="userRemark !=null and userRemark != ''">
+			 and tbl_sys_user.user_remark=#{userRemark}
+		  </if>
+		  <if test="userSex !=null and userSex != ''">
+			 and tbl_sys_user.user_sex=#{userSex}
+		  </if>
+		  <if test="userMobile !=null and userMobile != ''">
+			 and tbl_sys_user.user_mobile=#{userMobile}
+		  </if>
+		  <if test="userTel !=null and userTel != ''">
+			 and tbl_sys_user.user_tel=#{userTel}
+		  </if>
+		  <if test="userEmail !=null and userEmail != ''">
+			 and tbl_sys_user.user_email=#{userEmail}
+		  </if>
+		  <if test="delFlg !=null and delFlg != ''">
+			 and tbl_sys_user.del_flg=#{delFlg}
+		  </if>
+		  <if test="createTime !=null and createTime != ''">
+			 and tbl_sys_user.create_time=#{createTime}
+		  </if>
+		  <if test="createUser !=null and createUser != ''">
+			 and tbl_sys_user.create_user=#{createUser}
+		  </if>
+		  <if test="updateTime !=null and updateTime != ''">
+			 and tbl_sys_user.update_time=#{updateTime}
+		  </if>
+		  <if test="updateUser !=null and updateUser != ''">
+			 and tbl_sys_user.update_user=#{updateUser}
+		  </if>
+	  </where>
+	  order by tbl_sys_user.update_time desc
+	</select>
+	
+	<!--保存用户信息  -->
+	<insert id="saveSysUser" parameterType="SysUser">
+	insert into tbl_sys_user (user_id,password,user_name,user_remark,user_sex,user_mobile,user_tel,user_email,del_flg,create_time,create_user,update_time,update_user)
+	 values 
+	(#{userId},#{password},#{userName},#{userRemark},#{userSex},#{userMobile},#{userTel},#{userEmail},#{delFlg},now(),#{createUser},now(),#{updateUser})
+	</insert>
+	
+	<!--逻辑删除用户信息  -->
+	<update id="logicMultiDeleteRole" parameterType="SysUser">
+		update tbl_sys_user set del_flg='1',update_user=#{updateUser},update_time=now() where user_id in
+		<foreach collection="userIds" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</update>
+	
+	<!--保存用户角色信息  -->
+	<insert id="saveSysUserRole" parameterType="SysUser">
+	insert into tbl_sys_user_role (user_id,role_id,del_flg,create_time,create_user,update_time,update_user)
+	 values 
+	(#{userId},#{roleId},#{delFlg},now(),#{createUser},now(),#{updateUser})
+	</insert>
+	
+	<!--删除用户角色信息  -->
+	<delete id="deleteSysUserRole" parameterType="SysUser">
+	delete from  tbl_sys_user_role where user_id = #{userId}
+	</delete>
+	
+	<!--修改用户信息  -->
+	<update id="updateSysUser" parameterType="SysUser">
+	  update tbl_sys_user
+	 <set> 
+	  <if test="userId != null">user_id=#{userId},</if>
+	  <if test="password != null">password=#{password},</if>
+	  <if test="userName != null">user_name=#{userName},</if>
+	  <if test="userRemark != null">user_remark=#{userRemark},</if>
+	  <if test="userSex != null">user_sex=#{userSex},</if>
+	  <if test="userMobile != null">user_mobile=#{userMobile},</if>
+	  <if test="userTel != null">user_tel=#{userTel},</if>
+	  <if test="userEmail != null">user_email=#{userEmail},</if>
+	  <if test="delFlg != null">del_flg=#{delFlg},</if>
+	  <if test="createTime != null">create_time=now(),</if>
+	  <if test="createUser != null">create_user=#{createUser},</if>
+	  <if test="updateTime != null">update_time=now(),</if>
+	  <if test="updateUser != null">update_user=#{updateUser},</if>
+	</set>
+	  where 1=1 and user_id=#{userId} 
+	</update>
+	
+	
+	 <!--通过用户Id得到角色信息  -->
+	<select id="getRoleListByUserId" parameterType="sysUser" resultMap="SysRoleMap">
+		select * from tbl_sys_role t1,tbl_sys_user_role t2 where t1.role_id = t2.role_id
+		and t2.user_id=#{userId}
+	</select>
+	
+	<!--通过用户Id得到权限信息  -->
+	<select id="getSysPermissByRoleId" parameterType="sysUser" resultMap="SysPermissMap">
+		select * from tbl_sys_permission t1,tbl_sys_user_permission t2 where t1.permission_id = t2.permission_id
+		and t2.user_id=#{userId}
+	</select>
+</mapper>

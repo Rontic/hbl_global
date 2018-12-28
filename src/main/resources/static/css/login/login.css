@@ -1,0 +1,112 @@
+@charset "utf-8";
+	/**
+ * base style of www.*****.com
+ *
+ * @since    2011-6-15
+ * @finish    2011-7-18
+ * @copyright yanzhimin
+ * @author    yanzhimin < slmily@126.com >
+ *
+ * SVN:$Id:base.css 74 2011-06-8 16:19:12Z yanzhimin $
+ */
+/* basic styles */
+/* base---------------------------------------------------------------------*/
+html {
+	height: 100%;
+	background:#016AA9  url('../../../../images/login/dots.png') center center fixed;
+	background-size: auto, cover;
+}
+body { height:100%; text-align:center;}
+body,input,textarea,select,button {
+	margin:0;
+	padding:0;
+	font-size:12px;
+}
+.clear {
+	clear:both;
+	height:0;
+	overflow:hidden
+}
+.btn{ background: url(images/login/login_btn.gif); border:0; width:77px; height:31px;}
+label,input{ vertical-align:middle}
+img { margin:0; padding:0; border:0; }
+
+.centerDiv { display:inline-block; zoom:1; *display:inline; vertical-align:middle; text-align:left; width:500px; padding:0 10px;}
+.hiddenDiv { height:100%; overflow:hidden; display:inline-block; width:1px; overflow:hidden; margin-left:-1px; zoom:1; *display:inline; *margin-top:-1px; _margin-top:0; vertical-align:middle;}
+.login_bg{width:500px; height:343px;background:url(../../images/login/login-bg.png) left top no-repeat; margin:auto;}
+.login_ds{width:500px; height:343px;background:url(../../images/login/login-ds.png) left top no-repeat; margin:auto;}
+.login_erp{width:500px; height:343px;background:url(../../images/login/login-erp.png) left top no-repeat; margin:auto;}
+.login{ padding-top:100px;_padding-top:80px; font-family:"微软雅黑"; padding-left:80px; padding-right:100px;}
+.login_erp .login{ padding-top:110px;}
+.login_bg .login{ padding-top:110px;}
+
+.login th {
+	width: 60px;
+	padding-right:5px;
+	font-weight:100;
+}
+.login select{ height:20px;border:solid 1px #c8dbe7;}
+.login input.txt {
+	border:solid 1px #c8dbe7;
+	padding:2px 5px;
+	color:#085d8f; 
+	/*background:#fff;*/ 
+	height:20px; 
+	width:166px;
+}
+.login td{ padding:3px 5px; }
+#js_F {
+	position:relative;
+	top:0px; left:0px;
+	overflow:hidden;
+	width:238px;
+	height:199px;
+}
+#js_F img{
+	position:absolute;
+	top:0; left:0;
+	width:238px;
+	height:199px;
+}
+.button {
+	font-size:16px;
+	font-family:"微软雅黑";
+	border: 1px solid #00487a;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background: #0567ad url("/images/login/button.gif") repeat-x;
+	padding: 5px 9px 5px;padding: 5px 9px 5px/9;*padding: 2px 6px;
+	_padding: 2px 6px;
+	text-shadow: #00487a 1px 1px 0;
+	color: #fff;
+	cursor: pointer;
+}
+.altbox .button {
+	border: 1px solid #272727;
+	background: #2a2a2a url("/images/login/altbutton.gif") repeat-x;
+	text-shadow: #000 1px 1px 0;
+}
+.altbox .button:hover,  .altbox .button:focus,  .altbox .button:active {
+	border-color: #00487a;
+	background: #0567ad url("/images/login/button.gif") repeat-x;
+	text-shadow: #00487a 1px 1px 0;
+	color: #fff;
+}
+
+.msg {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border: 1px solid;
+}
+.msg p { padding:0; margin:0;
+}
+.msg-info {
+	border-color: #9fd1f5;
+	background: #c3e6ff;
+	color: #005898;
+	padding:3px 10px;
+}
+.other{ padding:5px;}
+.other label{ padding-left:6px; color:#005898;}

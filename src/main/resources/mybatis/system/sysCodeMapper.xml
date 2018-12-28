@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SysCode">
+
+	
+<resultMap type="SysCode" id="SysCodeMap">
+  <result property="codeId" column="code_id"/>
+  <result property="codeTypeId" column="code_type_id"/>
+  <result property="codeValue" column="code_value"/>
+  <result property="codeOrder" column="code_order"/>
+  <result property="codeRemark" column="code_remark"/>
+  <result property="delFlg" column="del_flg"/>
+  <result property="createTime" column="create_time"/>
+  <result property="createUser" column="create_user"/>
+  <result property="updateTime" column="update_time"/>
+  <result property="updateUser" column="update_user"/>
+</resultMap>
+
+<resultMap type="SysCodeType" id="SysCodeTypeMap">
+  <result property="codeTypeId" column="code_type_id"/>
+  <result property="codeTypeValue" column="code_type_value"/>
+  <result property="codeTypeRemark" column="code_type_remark"/>
+  <result property="delFlg" column="del_flg"/>
+  <result property="createTime" column="create_time"/>
+  <result property="createUser" column="create_user"/>
+  <result property="updateTime" column="update_time"/>
+  <result property="updateUser" column="update_user"/>
+</resultMap>
+
+
+<!-- 查询codeType数量 -->
+	<select id="getCodeTypeCounts" parameterType="SysCodeType" resultType="java.lang.Integer">
+		select count(*) from tbl_sys_code_type
+		<where>
+			del_flg = '0'
+			<if test="codeTypeId != null and codeTypeId != ''">and code_type_id=#{codeTypeId}</if>
+			<if test="codeTypeValue != null and codeTypeValue != ''">and code_type_value LIKE concat('%',#{codeTypeValue},'%')</if>
+		</where>
+		order by code_type_Id asc
+	</select>
+	
+<!-- 查询codeType内容 -->	
+	<select id="getPagedtCodeType" parameterType="SysCodeType" resultMap="SysCodeTypeMap">
+		select * from tbl_sys_code_type
+		<where>
+			del_flg = '0'
+			<if test="codeTypeId != null and codeTypeId != ''">and code_type_id=#{codeTypeId}</if>
+			<if test="codeTypeValue != null and codeTypeValue != ''">and code_type_value LIKE concat('%',#{codeTypeValue},'%')</if>
+		</where>
+		order by code_type_Id asc
+	</select>
+	
+<!-- 根据codetypeid查询codeType -->	
+	<select id="getCodeTypeById" parameterType="string" resultMap="SysCodeTypeMap">
+		select * from tbl_sys_code_type
+		where 1=1
+		and del_flg = '0'
+		and code_type_id=#{codeTypeId}
+		order by code_type_id asc 
+	</select>
+	
+<!-- 修改codeType -->	
+	<update id="updateCodeType" parameterType="SysCodeType">
+		update tbl_sys_code_type
+		<set>
+			<if test="codeTypeValue != null">code_type_value=#{codeTypeValue},</if>
+			<if test="codeTypeRemark != null">code_type_remark=#{codeTypeRemark}</if>
+		</set>
+		where code_type_id = #{codeTypeId} and code_id = #{codeId}
+	</update>
+	
+<!-- 根据codeTypeId查询code -->	
+	<select id="getCodesByTypeId" parameterType="java.lang.String" resultMap="SysCodeMap">
+		select * from tbl_sys_code
+		where 1=1
+		and del_flg = '0'
+		and code_type_id=#{codeTypeId}
+		order by code_type_id asc , code_id asc
+	</select>
+
+<!-- 根据codeid和codeTypeId查询code是否重复 -->	
+	<select id="getCodeByCodeId" parameterType="Map" resultType="java.lang.Integer">
+		select count(*) from tbl_sys_code
+		where 1=1
+		and del_flg = '0'
+		and code_id=#{codeId}
+		and code_type_id=#{codeTypeId}
+	</select>
+
+<!-- 修改code -->	
+	<update id="updateCode" parameterType="SysCode">
+		update tbl_sys_code
+		<set>
+			<if test="codeTypeId != null">code_type_Id=#{codeTypeId},</if>
+			<if test="codeValue != null">code_value=#{codeValue},</if>
+			<if test="codeOrder != null">code_order=#{codeOrder},</if>
+			<if test="codeRemark != null">code_remark=#{codeRemark},</if>
+			<if test="delFlg != null">del_flg=#{delFlg},</if>
+			<if test="createTime != null">create_time=#{createTime},</if>
+			<if test="createUser != null">create_user=#{createUser},</if>
+			<if test="updateTime != null">update_time=now(),</if>
+			<if test="updateUser != null">update_user=#{updateUser}</if>
+		</set>
+		where code_id = #{codeId} and code_type_id = #{codeTypeId}
+	</update>
+
+<!-- 增加code -->	
+	<insert id="saveCode" parameterType="SysCode">
+		insert into tbl_sys_code(code_id,code_type_id,code_value,code_order,code_remark,del_flg,create_time,create_user,update_time,update_user)
+		values(#{codeId},#{codeTypeId},#{codeValue},#{codeOrder},#{codeRemark},#{delFlg},now(),#{createUser},now(),#{updateUser})
+	</insert>
+	
+	
+	<update id="deleteCodeById" parameterType="SysCode">
+		delete from tbl_sys_code where code_id = #{codeId} and code_type_id = #{codeTypeId}
+	</update>
+	
+<!-- 获取字典下拉框内容 -->	
+	<select id="getCodeBySysNoAndTypeNo" parameterType="Map" resultMap="SysCodeMap">
+		select sc.code_id,sc.code_value from tbl_sys_code sc,tbl_sys_code_type sct where sc.code_type_id=sct.code_type_id and
+		sct.code_type_id=#{codeTypeId} and sc.del_flg='0' and sct.del_flg='0'
+		order by sc.code_id
+   </select>
+   
+	
+<!--查找所有编码信息 -->
+	<select id="getAllCodeInfo"  resultMap="SysCodeMap">
+		select * from tbl_sys_code
+		where del_flg='0'
+		order by code_type_id,code_order
+	</select>
+	
+	<!-- 查询车辆类型 -->
+<select id="queryCarTypeList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1004'
+</select>
+
+
+
+<!-- 查询车体状况-->
+<select id="queryCarConditionList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1005'
+</select>
+
+<!-- 查询有效状态-->
+<select id="queryValidStateList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1006'
+</select>
+
+<!-- 查询交易状态-->
+<select id="queryDealStateList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1008'
+</select>
+
+<!-- 查询货物类型 -->
+<select id="queryGoodsTypeList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1009'
+</select>
+
+<!-- 查询运输类型-->
+<select id="queryFreightTypeList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1010'
+</select>
+
+<!-- 查询注意事项-->
+<select id="queryAttentionMatterList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1011'
+</select>
+
+<!-- 查询车源类型-->
+<select id="queryTypeList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1012'
+</select>
+
+<!-- 查询路线状态-->
+<select id="queryRouteStateList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1013'
+</select>
+
+<!-- 查询会员类型-->
+<select id="queryMemberTypeList" resultMap="SysCodeMap">
+  select tsc.code_id ,tsc.code_value from tbl_sys_code  tsc where tsc.code_type_id ='1003'
+</select>
+	
+</mapper>

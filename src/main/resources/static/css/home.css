@@ -1,0 +1,18 @@
+.pageTitle{margin:28px 10px 20px;}
+.pageTitle h2{font-size:20px;}
+/*主页按钮*/
+.mainButton{width:100%;display:flex;flex-wrap:wrap;}
+.mainButton .large{display: flex;align-items: center;width:calc(25% - 20px) ! important;height:100px;margin:10px;}
+.mainButton .large:nth-child(1){background:#17af27;}
+.mainButton .large:nth-child(2){background:#f55438;}
+.mainButton .large:nth-child(3){background:#f39502;}
+.mainButton .large:nth-child(4){background:#10a9e3;}
+.mainButton .large:nth-child(5){background:#9b58b7;}
+.mainButton .large:nth-child(6){background:#4e5c64;}
+.mainButton .large:nth-child(7){background:#f30291;}
+.mainButton .large:nth-child(8){background:#009688;}
+.iconBg .layui-icon{line-height:100px;font-size:30px;}
+.mainButton .large p{line-height: 20px;text-align: left;margin-left: 20px;white-space: pre-wrap;}
+.navBg{margin-right:10px;}
+.mainButton .layui-icon{transition: all 0.3s ease-in-out;-webkit-transition: all 0.3s ease-in-out;-o-transition: all 0.3s ease-in-out;-moz-transition: all 0.3s ease-in-out;-ms-transition: all 0.3s ease-in-out;}
+/*.panel_word span:nth-child(2){margin-left:15px;}*/

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="GDPItem">
+
+    <resultMap type="GDPItem" id="GDPItemMap">
+        <result property="gdpId" column="gdp_id"/>
+        <result property="yearAmount" column="year_amount"/>
+        <result property="travelAmount" column="travel_amount"/>
+        <result property="gdpYear" column="gdp_year"/>
+        <result property="createTime" column="create_time"/>
+        <result property="createUser" column="create_user"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="updateUser" column="update_user"/>
+    </resultMap>
+
+
+    <insert id="saveGdpItems" parameterType="java.util.HashMap">
+        INSERT INTO tbl_gdp(gdp_id,year_amount,travel_amount,gdp_year,create_time,update_time,create_user,update_user)
+        VALUES
+        <foreach collection="gdpItems" item="gdpItem" separator=",">
+            (#{gdpItem.gdpId},#{gdpItem.yearAmount},#{gdpItem.travelAmount},#{gdpItem.gdpYear},NOW(),NOW(),#{gdpItem.createUser},#{gdpItem.updateUser})
+        </foreach>
+    </insert>
+</mapper>

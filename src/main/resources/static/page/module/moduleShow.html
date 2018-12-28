@@ -1,0 +1,190 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/css/list.css" media="all"/>
+    <link rel="stylesheet" href="/css/attachment.css"/>
+    <script type="text/javascript" src="/js/pdf.js"></script>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.all.js"></script>
+    <script src="https://webapi.amap.com/maps?v=1.4.12&key=62edcca58fc38e7b7aad87637655d8c2&plugin=Map3D,AMap.DistrictLayer,AMap.Scale,AMap.ToolBar,AMap.Driving"></script>
+    <script src="https://a.amap.com/jsapi_demos/static/demo-center/js/demoutils.js"></script>
+    <script src="https://a.amap.com/Loca/static/mock/adcodes.js"></script>
+    <script src="//webapi.amap.com/ui/1.0/main.js?v=1.4.12"></script>
+    <script type="text/javascript" src="/js/module/moduleShow.js"></script>
+    <style>
+        .input-card .btn {
+            margin-right: 1.2rem;
+            width: 100px;
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border: 1px solid transparent;
+            border-top-color: transparent;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+            transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+            background-color: transparent;
+            background-image: none;
+            color: #25A5F7;
+            border-color: #25A5F7;
+            padding: .25rem .5rem;
+            line-height: 1.5;
+            border-radius: 1rem;
+            -webkit-appearance: button;
+            cursor: pointer;
+        }
+
+        .input-card .btn:last-child {
+            margin-right: 0;
+        }
+
+        #panel {
+            position: fixed;
+            background-color: white;
+            max-height: 70%;
+            overflow-y: auto;
+            top: 50px;
+            right: 20%;
+            width: 280px;
+        }
+
+        #panel .amap-lib-driving {
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .input-card {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            width: 225px;
+            border-width: 0;
+            border-radius: 0.4rem;
+            box-shadow: 0 2px 6px 0 rgba(114, 124, 245, .5);
+            position: fixed;
+            bottom: 1rem;
+            right: 21%;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+            padding: 0.75rem 1.25rem;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="attachmentPage" style="display:none">
+    <input type="hidden" id="moduleId" th:value="${moduleId}">
+    <div class="layui-tab layui-tab-card" lay-filter="demo">
+        <ul class="layui-tab-title">
+            <li class="layui-this" id="dataTab">数据统计</li>
+            <li id="mapTab">地域呈现</li>
+            <li id="fileTab">文档展示</li>
+            <li id="imageTab">图文展示</li>
+            <li id="roadTab">路线展示</li>
+        </ul>
+
+        <div class="layui-tab-content">
+            <!--数据图表-->
+            <div class="layui-tab-item layui-show" id="dataDiv">
+                <div class="echartTitle"><span id="dataTitle">条形数据统计</span></div>
+                <div id="graphBox" style="margin-left: 10%;width: 80%"></div>
+            </div>
+            <!-- 地图地域-->
+            <div class="layui-tab-item" id="mapDiv">
+                <div id="echartBox" style="width:100%;height:100%;resize:both;position:fixed"></div>
+                <!-- 坐标选择弹框-->
+                <div class="echartIcon">
+                    <ul class="echartIconBox">
+                    </ul>
+                    <div class="closeBtn"><i class="iconfont" title="收起">&#xe61b;</i><span>点击收起地标</span></div>
+                </div>
+                <div class="searchBox">
+                    <ul class="searchMapBox">
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 文档pdf-->
+            <div class="layui-tab-item" id="fileDiv">
+                <!--<div class="lightbox" id="lightbox"></div>-->
+                <div class="leftPdf">
+                    <div id="pop" class="pop">
+                        <!--<a href="javascript:close()" id="close"><i class="layui-icon" style="color:#fff">&#x1006;</i></a>-->
+                        <iframe src="" frameborder="0" id="pdfContainer" name="pdfContainer"></iframe>
+                    </div>
+                </div>
+                <div class="relativeList">
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                        <legend>文档列表</legend>
+                    </fieldset>
+                    <ul class="layui-timeline pdfList">
+
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 图片-->
+            <div class="layui-tab-item" id="imageDiv">
+                <div class="leftPdf">
+                    <div id="imageBox" style="width:70%;display: inline-block;float: left">
+                        <p>
+                            <img id="showImage" style="max-width:100%;" />
+                        </p>
+                    </div>
+                    <div style="width:30%;display: inline-block;">
+                        <p id="showImageText">
+
+                        </p>
+                    </div>
+                </div>
+                <div class="relativeList">
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                        <legend>图片列表</legend>
+                    </fieldset>
+                    <ul class="layui-timeline imageList" id="imageList">
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="layui-tab-item" id="roadDiv">
+                <div id="roadMap" style="width:80%;height:100%;resize:both;position:fixed"></div>
+                <div id="panel"></div>
+                <div class="input-card">
+                    <h4>路线行驶展示</h4>
+                    <div class="input-item">
+                        <input type="button" class="btn" value="开始行驶" id="start" onclick="startAnimation()"/>
+                        <input type="button" class="btn" value="暂停行驶" id="pause" onclick="pauseAnimation()"/>
+                    </div>
+                    <div class="input-item">
+                        <input type="button" class="btn" value="继续行驶" id="resume" onclick="resumeAnimation()"/>
+                        <input type="button" class="btn" value="停止行驶" id="stop" onclick="stopAnimation()"/>
+                    </div>
+                </div>
+                <div class="relativeList" style="float: right;width: 20%">
+                    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+                        <legend>路线列表</legend>
+                    </fieldset>
+                    <ul class="layui-timeline roadList" id="roadList">
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

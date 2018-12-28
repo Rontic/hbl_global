@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties>
+		<property name="dialect" value="mysql" />
+	</properties>
+
+	<settings>
+		<setting name="logImpl" value="STDOUT_LOGGING"/>
+	</settings>
+	
+	<typeAliases>
+		<!-- system start -->
+		<typeAlias alias="SysUser" type="com.hbl.global.entity.system.SysUser" />
+		<typeAlias alias="SysRole" type="com.hbl.global.entity.system.SysRole" />
+		<typeAlias alias="SysPermiss" type="com.hbl.global.entity.system.SysPermiss" />
+		<typeAlias alias="SysModule" type="com.hbl.global.entity.system.SysModule" />
+		<typeAlias alias="SysCode" type="com.hbl.global.entity.system.SysCode" />
+		<typeAlias alias="SysCodeType" type="com.hbl.global.entity.system.SysCodeType" />
+        <typeAlias alias="BaseModule" type="com.hbl.global.entity.module.BaseModule" />
+		<!-- system end -->
+
+		<!-- Module start -->
+		<typeAlias alias="ModuleFile" type="com.hbl.global.entity.module.ModuleFile" />
+        <typeAlias alias="GDPItem" type="com.hbl.global.entity.module.GDPItem" />
+        <typeAlias alias="PDFDetail" type="com.hbl.global.entity.module.PDFDetail" />
+        <typeAlias alias="ItemPercent" type="com.hbl.global.entity.statistics.ItemPercent" />
+		<typeAlias alias="PoiType" type="com.hbl.global.entity.map.PoiType" />
+        <typeAlias alias="OrdinaryPoi" type="com.hbl.global.entity.map.OrdinaryPoi" />
+		<typeAlias alias="ModuleImage" type="com.hbl.global.entity.module.ModuleImage" />
+		<typeAlias alias="ModuleRoad" type="com.hbl.global.entity.module.ModuleRoad" />
+		<!-- Module start -->
+
+	</typeAliases>
+
+	<mappers>
+		<!-- system start -->
+		<mapper resource="mybatis/system/sysUserMapper.xml" />
+		<mapper resource="mybatis/system/sysRoleMapper.xml" />
+		<mapper resource="mybatis/system/sysModuleMapper.xml" />
+		<mapper resource="mybatis/system/sysCodeMapper.xml" />
+		<mapper resource="mybatis/system/sysSearchMapper.xml" />
+		<!-- system end -->
+
+        <!-- system start -->
+        <mapper resource="mybatis/module/moduleFileMapper.xml" />
+        <mapper resource="mybatis/gdpItem/gdpItemMapper.xml" />
+		<mapper resource="mybatis/pdfDetail/pdfDetailMapper.xml" />
+        <mapper resource="mybatis/statistics/itemPercentMapper.xml" />
+        <mapper resource="mybatis/map/poiTypeMapper.xml" />
+        <mapper resource="mybatis/map/ordinaryPoiMapper.xml" />
+		<mapper resource="mybatis/module/moduleImageMapper.xml" />
+		<mapper resource="mybatis/module/moduleRoadMapper.xml" />
+        <!-- system start -->
+	</mappers>
+
+</configuration>

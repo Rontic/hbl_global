@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ModuleImage">
+
+    <resultMap type="ModuleImage" id="ModuleImageMap">
+        <result property="moduleId" column="module_id"/>
+        <result property="imageUrl" column="image_url"/>
+        <result property="imageName" column="image_name"/>
+        <result property="content" column="content"/>
+    </resultMap>
+
+
+    <select id="selectImageList" resultMap="ModuleImageMap" parameterType="java.lang.String">
+        SELECT * FROM
+		  tbl_module_image
+		WHERE
+		  module_id = #{moduleId}
+    </select>
+
+    <insert id="insertList" parameterType="java.util.HashMap">
+        INSERT INTO tbl_module_image(module_id,image_name,image_url,content)
+        VALUES
+        <foreach collection="list" item="moduleImage" separator=",">
+            (#{moduleImage.moduleId},#{moduleImage.imageName},#{moduleImage.imageUrl},#{moduleImage.content})
+        </foreach>
+    </insert>
+</mapper>

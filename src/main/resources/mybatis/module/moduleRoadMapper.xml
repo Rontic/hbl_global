@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="ModuleRoad">
+
+    <resultMap type="ModuleRoad" id="ModuleRoadMap">
+        <result property="moduleId" column="module_id"/>
+        <result property="roadName" column="road_name"/>
+        <result property="startLon" column="start_lon"/>
+        <result property="endLat" column="end_lat"/>
+        <result property="endLon" column="end_lon"/>
+        <result property="startLat" column="start_lat"/>
+    </resultMap>
+
+
+    <select id="selectRoadList" resultMap="ModuleRoadMap" parameterType="java.lang.String">
+        SELECT * FROM
+		  tbl_module_road
+		WHERE
+		  module_id = #{moduleId}
+    </select>
+
+    <insert id="insertList" parameterType="java.util.HashMap">
+        INSERT INTO tbl_module_Road(module_id,road_name,start_lon,end_lat,end_lon,start_lat)
+        VALUES
+        <foreach collection="list" item="moduleRoad" separator=",">
+            (#{moduleRoad.moduleId},#{moduleRoad.roadName},#{moduleRoad.startLon},#{moduleRoad.endLat},#{moduleRoad.endLon},#{moduleRoad.startLat})
+        </foreach>
+    </insert>
+</mapper>

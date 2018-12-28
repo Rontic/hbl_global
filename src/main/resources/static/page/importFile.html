@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据录入</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all"/>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/layui/layui.js"></script>
+    <script type="text/javascript" src="/js/import.js"></script>
+</head>
+<body>
+<div id="importDiv">
+    <ul class="layui-timeline">
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">PDF文件数据<a target="_self" href="/importTemp/PDF文件数据.xlsx" style="margin-left: 20px; font-size: 14px;">(获取模板)</a></h3>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn layui-btn-normal" id="importPdf">选择文件</button>
+                    <button type="button" class="layui-btn" id="doImportPdf">开始上传</button>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">地图点数据<a target="_self" href="/importTemp/地图点数据.xlsx" style="margin-left: 20px; font-size: 14px;">(获取模板)</a></h3>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn layui-btn-normal" id="importMap">选择文件</button>
+                    <button type="button" class="layui-btn" id="doImportMap">开始上传</button>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">线路数据<a target="_self" href="/importTemp/线路数据.xlsx" style="margin-left: 20px; font-size: 14px;">(获取模板)</a></h3>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn layui-btn-normal" id="importRoad">选择文件</button>
+                    <button type="button" class="layui-btn" id="doImportRoad">开始上传</button>
+                </div>
+            </div>
+        </li>
+        <li class="layui-timeline-item">
+            <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+            <div class="layui-timeline-content layui-text">
+                <h3 class="layui-timeline-title">图文数据<a target="_self" href="/importTemp/图文数据.xlsx" style="margin-left: 20px; font-size: 14px;">(获取模板)</a></h3>
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn layui-btn-normal" id="importImage">选择文件</button>
+                    <button type="button" class="layui-btn" id="doImportImage">开始上传</button>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
