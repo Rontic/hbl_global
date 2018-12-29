@@ -53,6 +53,8 @@ public class ModuleShowController extends BaseController {
         modelAndView.setViewName("page/module/moduleList.html");
         modelAndView.addObject("moduleId",request.getParameter("moduleId"));
         modelAndView.addObject("moduleName",request.getParameter("moduleName"));
+        modelAndView.addObject("realPoint",request.getParameter("realPoint"));
+        modelAndView.addObject("totalPoint",request.getParameter("totalPoint"));
         return modelAndView;
     }
 
@@ -161,6 +163,9 @@ public class ModuleShowController extends BaseController {
     public ModelAndView goFile(ModelAndView  modelAndView, HttpServletRequest request){
         modelAndView.setViewName("page/module/moduleShow.html");
         modelAndView.addObject("moduleId",request.getParameter("moduleId"));
+        modelAndView.addObject("moduleName",request.getParameter("moduleName"));
+        modelAndView.addObject("realPoint",request.getParameter("realPoint"));
+        modelAndView.addObject("totalPoint",request.getParameter("totalPoint"));
         return modelAndView;
     }
 

@@ -85,7 +85,12 @@
     </style>
 </head>
 <body>
-<div class="attachmentPage" style="display:none">
+<div>
+    <input type="hidden" id="hiddenRealPoint" th:value="${realPoint}" />
+    <input type="hidden" id="hiddenTotalPoint" th:value="${totalPoint}" />
+    <p th:text="${moduleName}"></p>
+</div>
+<div class="attachmentPage" style="display:none;">
     <input type="hidden" id="moduleId" th:value="${moduleId}">
     <div class="layui-tab layui-tab-card" lay-filter="demo">
         <ul class="layui-tab-title">

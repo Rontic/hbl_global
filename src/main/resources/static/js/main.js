@@ -1,45 +1,43 @@
 var $ =jQuery =layui.jquery;
 $(function(){
+    initPageData();
+});
+
+function initPageData() {
     layui.config({
         base : "js/"
     }).use(['element','jquery'],function(){
-        var  element = layui.element,
-            $ = layui.jquery;
-    $.ajax({
-        url: "/moduleShow/getMainData.do",
-        async: false,
-        type:"post",
-        success:function(data){
-            if(data.success){
-                data = data.data;
-                var mainList = $("#mainDiv").find(".panel");
-                var totalPoint = 0;
-                var realPoint = 0 ;
-                for(var i=0;i<data.length;i++){
-                    mainList.eq(i).find(".realPoint").text(data[i].realPoint);
-                    mainList.eq(i).find(".totalPoint").text(data[i].totalPoint);
-                    mainList.eq(i).find(".itemNum").text('材料数：'+data[i].itemNum+'条');
-                    mainList.eq(i).find(".moduleName").html(data[i].moduleName);
-                    var percentNumber1 = (data[i].realPoint/data[i].totalPoint*100).toFixed(0)+'%';
-                    var percentHtml1="<div class='layui-progress-bar layui-bg-green' lay-percent="+percentNumber1+">0%</div>";
-                    $(".perProgress"+i).append(percentHtml1);
-                    element.progress('demo'+i,percentNumber1);
-                    $(".perProgress"+i).children('.layui-progress-bar').html(percentNumber1);
-                    mainList.eq(i).find(".moduleName").html(data[i].moduleName);
-                    totalPoint+=data[i].totalPoint;
-                    realPoint+=data[i].realPoint;
+        var  element = layui.element;
 
-                    $("#module_"+(i+1)).attr("href","/moduleShow/list.do?moduleId="+data[i].moduleId+"&moduleName="+data[i].moduleName);
-                }
-                initPage(totalPoint,realPoint);
-            }else{
-                layer.msg(data.msg);
-            }
+        //直接取index页面的module数据，避免再次请求
+        var liList = $("#leftModule",parent.document).find("li");
+        var mainList = $("#mainDiv").find(".panel");
+        var sumTotalPoint = 0;
+        var sumRealPoint = 0 ;
+        for(var i=0;i<liList.length;i++){
+            var moduleName = liList.eq(i).find(".moduleName").val();
+            var moduleId = liList.eq(i).find(".moduleId").val();
+            var realPoint = Number(liList.eq(i).find(".realPoint").val());
+            var totalPoint = Number(liList.eq(i).find(".totalPoint").val());
+            var itemNum = Number(liList.eq(i).find(".itemNum").val());
+            mainList.eq(i).find(".realPoint").text(realPoint);
+            mainList.eq(i).find(".totalPoint").text(totalPoint);
+            mainList.eq(i).find(".itemNum").text('材料数：'+itemNum+'条');
+            mainList.eq(i).find(".moduleName").html(moduleName);
+            var percentNumber1 = (realPoint/totalPoint*100).toFixed(0)+'%';
+            var percentHtml1="<div class='layui-progress-bar layui-bg-green' lay-percent="+percentNumber1+">0%</div>";
+            $(".perProgress"+i).append(percentHtml1);
+            element.progress('demo'+i,percentNumber1);
+            $(".perProgress"+i).children('.layui-progress-bar').html(percentNumber1);
+            mainList.eq(i).find(".moduleName").html(moduleName);
+            sumTotalPoint+=totalPoint;
+            sumRealPoint+=realPoint;
+
+            $("#module_"+(i+1)).attr("href","/moduleShow/list.do?moduleId="+moduleId+"&moduleName="+moduleName+"&realPoint="+realPoint+"&totalPoint="+totalPoint);
         }
+        initPage(sumTotalPoint,sumRealPoint);
     });
-    });
-});
-
+}
 function initPage(totalPoint,realPoint) {
     layui.config({
         base : "js/"
@@ -54,9 +52,5 @@ function initPage(totalPoint,realPoint) {
         element.progress('demo',percentNumber);
         $('#demoPercent').children('.layui-progress-bar').html(percentNumber);
     });
-}
-
-function goModule(moduleId,moduleName) {
-    $("#childFrame").attr("src","/moduleShow/list.do?moduleId="+moduleId+"&moduleName="+moduleName);
 }
 

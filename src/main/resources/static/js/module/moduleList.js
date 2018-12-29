@@ -82,5 +82,5 @@ function isRealNum(val){
 }
 
 function showFile(moduleId) {
-    window.location.href = "/moduleShow/goFile.do?moduleId="+moduleId;
+    window.location.href = "/moduleShow/goFile.do?moduleId="+moduleId+"&realPoint="+$("#hiddenRealPoint").val()+"&totalPoint="+$("#hiddenTotalPoint").val()+"&moduleName="+$("#moduleName").text();
 }

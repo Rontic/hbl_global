@@ -20,7 +20,9 @@
 </head>
 <body class="childrenBody">
 <div>
-    <p th:text="${moduleName}"></p>
+    <input type="hidden" id="hiddenRealPoint" th:value="${realPoint}" />
+    <input type="hidden" id="hiddenTotalPoint" th:value="${totalPoint}" />
+    <p id="moduleName" th:text="${moduleName}"></p>
 </div>
 <div class="listPage">
     <div class="layui-form news_list" style="margin-top:20px;">

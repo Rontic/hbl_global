@@ -32,7 +32,7 @@
                     贤心
                 </a>
             </li>
-            <li class="layui-nav-item"><a href="">退了</a></li>
+            <li class="layui-nav-item"><a href="#" onclick="logout()">退了</a></li>
         </ul>
     </div>
 
@@ -40,14 +40,14 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree" id="leftModule">
-                <li class="layui-nav-item"><a href="#" onclick="goModule('0001','规划统筹')">1.规划统筹</a></li>
+                <!--<li class="layui-nav-item"><a href="#" onclick="goModule('0001','规划统筹')">1.规划统筹</a></li>
                 <li class="layui-nav-item"><a href="#" onclick="goModule('0002','要素体系')">2.要素体系</a></li>
                 <li class="layui-nav-item"><a href="#" onclick="goModule('0003','公共服务')">3.公共服务</a></li>
                 <li class="layui-nav-item"><a href="#" onclick="goModule('0004','资源环境')">4.资源环境</a></li>
                 <li class="layui-nav-item"><a href="#" onclick="goModule('0005','优质服务')">5.优质服务</a></li>
                 <li class="layui-nav-item"><a href="#" onclick="goModule('0006','品牌营销')">6.品牌营销</a></li>
                 <li class="layui-nav-item"><a href="#" onclick="goModule('0007','体制机制')">7.体制机制</a></li>
-                <li class="layui-nav-item"><a href="#" onclick="goModule('0008','政策供给与创新')">8.政策供给与创新</a></li>
+                <li class="layui-nav-item"><a href="#" onclick="goModule('0008','政策供给与创新')">8.政策供给与创新</a></li>-->
             </ul>
         </div>
     </div>
@@ -62,10 +62,28 @@
 </div>
 <script src="/layui/layui.js"></script>
 <script>
-    //JavaScript代码区域
-    layui.use('element', function(){
-        var element = layui.element;
-
+    $(function(){
+        $.ajax({
+            url: "/moduleShow/getMainData.do",
+            async: false,
+            type:"post",
+            success:function(data){
+                if(data.success){
+                    data = data.data;
+                    var liString = "";
+                    for(var i = 0 ;i<data.length;i++){
+                        liString += '<li class="layui-nav-item"><a href="#" onclick="goModule(\''+data[i].moduleId+'\',\''+data[i].moduleName+'\')">'+(i+1)+'.'+data[i].moduleName+'</a>';
+                        liString += '<input type="hidden" class="realPoint" value="'+data[i].realPoint+'"/>';
+                        liString += '<input type="hidden" class="totalPoint" value="'+data[i].totalPoint+'"/>';
+                        liString += '<input type="hidden" class="moduleId" value="'+data[i].moduleId+'"/>';
+                        liString += '<input type="hidden" class="moduleName" value="'+data[i].moduleName+'"/>';
+                        liString += '<input type="hidden" class="itemNum" value="'+data[i].itemNum+'"/></li>';
+                    }
+                    $("#leftModule").empty();
+                    $("#leftModule").append(liString);
+                }
+            }
+        })
     });
     function goModule(moduleId,moduleName) {
         $("#childFrame").attr("src","/moduleShow/list.do?moduleId="+moduleId+"&moduleName="+moduleName);
@@ -75,6 +93,10 @@
             $(this).attr("class","layui-nav-item");
         });
         $("#childFrame").attr("src","/page/main.html");
+    }
+
+    function logout() {
+        window.location.href = "/login/logout.do";
     }
 </script>
 </body>
