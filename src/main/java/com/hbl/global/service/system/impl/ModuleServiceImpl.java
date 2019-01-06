@@ -6,6 +6,8 @@ import com.hbl.global.service.base.impl.BaseServiceImpl;
 import com.hbl.global.service.system.ModuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +23,7 @@ public class ModuleServiceImpl extends BaseServiceImpl implements ModuleService 
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
     public int editPoint(BaseModule baseModule) {
         return commonDao.update("SysModule.editPoint",baseModule);
     }
@@ -28,5 +31,10 @@ public class ModuleServiceImpl extends BaseServiceImpl implements ModuleService 
     @Override
     public List<HashMap> getMainData() {
         return commonDao.selectList("SysModule.getMainData");
+    }
+
+    @Override
+    public String getRealPoint() {
+        return (String) commonDao.selectOne("SysModule.selectRealPoint");
     }
 }

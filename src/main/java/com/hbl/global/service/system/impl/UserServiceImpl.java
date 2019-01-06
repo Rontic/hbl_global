@@ -9,6 +9,9 @@ import com.hbl.global.service.base.impl.BaseServiceImpl;
 import com.hbl.global.service.system.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -35,6 +38,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void updateUserAndRoles(SysUser user) {
 		commonDao.update("SysUser.updateSysUser", user);
 		commonDao.delete("SysUser.deleteSysUserRole", user);
@@ -42,16 +46,19 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void updateUser(SysUser user) {
 		commonDao.update("SysUser.updateSysUser", user);
 	}
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void doLogicDeleteUser(SysUser user) {
 		commonDao.update("SysUser.logicMultiDeleteRole", user);
 	}
 	
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void saveUserAndRoles(SysUser user) {
 		commonDao.save("SysUser.saveSysUser", user);
 		saveUserRole(user);
@@ -74,6 +81,7 @@ public class UserServiceImpl extends BaseServiceImpl implements UserService {
 		}
 	}
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
 	public void saveUser(SysUser user) {
 		commonDao.save("SysUser.saveSysUser", user);
 	}

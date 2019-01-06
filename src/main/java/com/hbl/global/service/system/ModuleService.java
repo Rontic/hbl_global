@@ -12,4 +12,6 @@ public interface ModuleService extends BaseService{
     public int editPoint(BaseModule baseModule);
 
     public List<HashMap> getMainData();
+
+    public String getRealPoint();
 }

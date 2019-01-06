@@ -6,7 +6,6 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 
 import java.util.HashMap;
-
 @Controller
 public class BaseController {
     protected final Log logger = LogFactory.getLog(BaseController.class);

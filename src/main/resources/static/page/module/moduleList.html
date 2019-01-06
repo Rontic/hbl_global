@@ -19,23 +19,27 @@
     <script type="text/javascript" src="/js/module/moduleList.js"></script>
 </head>
 <body class="childrenBody">
-<div>
-    <input type="hidden" id="hiddenRealPoint" th:value="${realPoint}" />
-    <input type="hidden" id="hiddenTotalPoint" th:value="${totalPoint}" />
-    <p id="moduleName" th:text="${moduleName}"></p>
+<div class="headText">
+    <p th:text="${moduleName}"></p>
+    <div class="progressContent">
+        <h2>自评分数</h2>
+        <!--<span class="big" id="allScore"></span>  layui-progress-big  lay-filter="demo"-->
+        <div class="layui-progress layui-progress-big" id="demoPercent" lay-filter="demo" lay-showPercent="true"></div>
+        <!--<div class="layui-progress layui-progress-big" id="demoPercent" lay-showPercent="true"></div>-->
+    </div>
 </div>
 <div class="listPage">
-    <div class="layui-form news_list" style="margin-top:20px;">
+    <div class="layui-form news_list">
         <!--<input type="hidden" id="moduleId" value="${moduleId}" >-->
         <input type="hidden" id="moduleId" th:value="${moduleId}"/>
-        <table lay-filter="listTable" style="margin: 0px 10px;box-shadow: 0px 1px 5px #ccc;width:calc(100% - 20px)">
+        <table lay-filter="listTable" style="box-shadow: 0px 1px 5px #ccc;width:calc(100% - 20px)">
             <thead>
             <tr>
-                <th lay-data="{field:'moduleId',sort: true,width:100}">SN</th>
-                <th lay-data="{field:'moduleName',width:600}">创建内容</th>
-                <th lay-data="{field:'totalPoint',width:150}">总分</th>
-                <th lay-data="{field:'realPoint',edit:'nu',width:150}">自评分</th>
-                <th lay-data="{field:'222'}">操作</th>
+                <th lay-data="{field:'moduleId',sort: true,width:82}">SN</th>
+                <th lay-data="{field:'moduleName',}">创建内容</th>
+                <th lay-data="{field:'totalPoint',width:160}">总分</th>
+                <th lay-data="{field:'realPoint',edit:'nu',width:160}">自评分</th>
+                <th lay-data="{field:'222',width:356}">操作</th>
             </tr>
             </thead>
             <tbody class="list_content"></tbody>

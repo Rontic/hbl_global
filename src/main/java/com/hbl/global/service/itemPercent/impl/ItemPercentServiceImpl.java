@@ -6,6 +6,9 @@ import com.hbl.global.service.base.impl.BaseServiceImpl;
 import com.hbl.global.service.itemPercent.ItemPercentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -17,6 +20,7 @@ public class ItemPercentServiceImpl extends BaseServiceImpl implements ItemPerce
     private CommonDao commonDao;
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
     public int saveItemPercent(List<ItemPercent> itemPercents) {
         HashMap<String,Object> map = new HashMap<>();
         map.put("itemPercents",itemPercents);

@@ -47,6 +47,10 @@ public class OrdinaryPoi {
 
     private String officialUrl;
 
+    private String tableNum;
+
+    private String wcNum;
+
     public String getId() {
         return id;
     }
@@ -206,6 +210,7 @@ public class OrdinaryPoi {
 
     public void setRealGPS() {
         this.realGPS = GPSUtil.bd09_To_Gcj02(lat,lon);
+        //this.realGPS =  new double[]{this.lon,this.lat};
     }
 
     public String getOfficialUrl() {
@@ -214,5 +219,21 @@ public class OrdinaryPoi {
 
     public void setOfficialUrl(String officialUrl) {
         this.officialUrl = officialUrl;
+    }
+
+    public String getTableNum() {
+        return tableNum;
+    }
+
+    public void setTableNum(String tableNum) {
+        this.tableNum = tableNum;
+    }
+
+    public String getWcNum() {
+        return wcNum;
+    }
+
+    public void setWcNum(String wcNum) {
+        this.wcNum = wcNum;
     }
 }

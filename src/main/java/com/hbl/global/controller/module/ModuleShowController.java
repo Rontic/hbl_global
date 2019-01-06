@@ -12,6 +12,7 @@ import com.hbl.global.service.map.PoiTypeService;
 import com.hbl.global.service.module.ModuleItemService;
 import com.hbl.global.service.pdfDetail.PDFDetailService;
 import com.hbl.global.service.system.ModuleService;
+import com.hbl.global.utils.PropertiesUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Controller
 @RequestMapping("/moduleShow/")
@@ -173,7 +172,23 @@ public class ModuleShowController extends BaseController {
     @ResponseBody
     public RequestResultModel getMainData(){
         try {
-            setSuccessResult(moduleService.getMainData(),"查询成功");
+            HashMap<String,Object> data = new HashMap<>();
+            data.put("moduleList",moduleService.getMainData());
+            int toYear = Integer.valueOf(new SimpleDateFormat("yyyy").format(new Date()));
+            List<String> dateArray = new LinkedList<>();
+            List<String> numArray = new LinkedList<>();
+            Properties point = PropertiesUtil.loadProperties("property/historyDo.properties");
+            dateArray.add(toYear - 2 + "");
+            numArray.add(point.getProperty(toYear - 2 + ""));
+            dateArray.add(toYear - 1 + "");
+            numArray.add(point.getProperty(toYear - 1 + ""));
+            dateArray.add(toYear + "");
+            numArray.add(moduleService.getRealPoint());
+            HashMap<String, List> dateMap = new HashMap<>();
+            dateMap.put("dateArray", dateArray);
+            dateMap.put("numArray", numArray);
+            data.put("lineData",dateMap);
+            setSuccessResult(data,"查询成功");
         }catch (Exception e){
             e.printStackTrace();
             setErrorResult("查询出错");

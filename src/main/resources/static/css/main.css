@@ -61,8 +61,8 @@
 .col{margin-left:15px;}
 .col:nth-child(:even){margin-right:15px;}
 .panel{float: left; text-align: center; width:16.666%; min-width:210px; margin-bottom:15px;}
-.panel_box a{display:block; background-color:#f2f2f2; border-radius:5px; overflow:hidden; }
-.panel_icon{ width:50%; display: inline-block;background-color:#54ade8;float:left;}
+.panel_box a{display:block; overflow:hidden; width: 100%;height: 100%;position: relative;}
+.panel_icon{ width:100%; display: inline-block;float:left;}
 .panel_icon i{ font-size:3em; color:#fff;}
 .panel a:hover .panel_icon i{ display:inline-block; transform:rotate(360deg); -webkit-transform:rotate(360deg); -moz-transform:rotate(360deg); -o-transform:rotate(360deg); -ms-transform:rotate(360deg);}
 .panel_word{ width:50%; display: inline-block; float:right;}
@@ -70,12 +70,15 @@
 .panel_word span{  height:30px; line-height:30px; }
 .allNews em{ font-style:normal; font-size:16px;display: block; }
 .panel_box a .allNews cite{ display:none; }
-.itemNum{height: 30px;line-height: 30px;text-align: left;margin-left: 10px;font-size: 14px;}
-.panel_box a cite{ font-size:16px; display: block; font-style:normal;color:#fff;    margin: 0px 10px;height:40px;line-height: 40px }
+.itemNum{line-height: 20px;margin-left: 16px;font-size: 14px;text-align: left;color: rgba(0,0,0,0.72);opacity: 0.64;}
+.panel_box a cite{ font-size:24px; text-align: left;display: block; font-style:normal;color: rgba(0,0,0,0.72); margin: 16px 0 0 16px;line-height: 36px }
 .sysNotice{ width:50%; float: left; }
 .sysNotice .layui-elem-quote{ line-height:26px; position: relative;}
 .sysNotice .layui-table{ margin-top:0; border-left:5px solid #e2e2e2; }
 .sysNotice .title .icon-new1{ position: absolute; top:8px; margin-left: 10px; color:#f00; font-size:25px; }
+.realPointDiv{width: calc(100% - 88px);height: 56px;text-align: left!important;margin-top:29px;background-image: linear-gradient(90deg, #17AF27 0%, rgba(238,238,238,0.00) 100%);}
+.realPoint{font-size: 26px;line-height: 56px;margin-left: 16px;}
+#circularGraph1,#circularGraph2,#circularGraph3,#circularGraph4,#circularGraph5,#circularGraph6,#circularGraph7,#circularGraph8{width: 96px;height: 96px;float: right;position: absolute;bottom:16px;right:16px;border-radius:50%;background: white;}
 
 /*锁屏*/
 .admin-header-lock{width: 320px; height: 170px; padding: 20px; position: relative; text-align: center;}
@@ -128,8 +131,20 @@
 .component span{color:#fff;font-size:18px;}
 .component span{color:#fff;font-size:18px;}
 .layui-tab-title li .layui-tab-close {border-radius: 50%;background: #fcfcfc;}
-.allGole{clear:both;width:calc(100% - 50px);margin:auto;background-color: #f2f2f2;box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);padding:10px}
+.allGole{clear:both;width:calc(100% - 244px);height: 100px;margin:24px 0 0 88px;border-left:8px solid #1AA094;border-radius:8px;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);background-color: #FFFFFF;}
 .totalScore{display:flex;justify-content: space-between;margin: 10px 0px 5px;}
 .big{font-size: 20px;color: #444;}
 .small{color: #999; font-size: 14px;}
 .layui-layout-admin .layui-body {bottom: 0px;}
+
+.childrenBody{width: 100%;height: 100%;background: #F7F8F7;}
+.allGoleHead{float:left;font-size: 32px;color: rgba(0,0,0,0.72);line-height: 100px;margin-left: 26px;font-weight: bold;}
+.allGoleContent{float: right;width:calc(100% - 418px);height: 100%;}
+.allGoleContent>h2{float:left;font-size: 14px;color: rgba(0,0,0,0.72);line-height: 100px;font-weight: bold;}
+#demoPercent{float: left;width:calc(100% - 116px);margin-left:8px;margin-top:42px;height: 18px;text-align: right;font-size: 14px;color: rgba(0,0,0,0.72);padding-right: 5px;}
+#demoPercent>div{background-image: linear-gradient(-90deg, #1FE978 0%, #21D5CB 100%)!important;}
+
+#mainDiv{width:calc(100% - 219px);margin:16px 0 0 88px;}
+#mainDiv>div{width: calc(25% - 16px);height: 180px;margin-right: 16px;background: #FFFFFF;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16);border-radius: 8px;}
+
+

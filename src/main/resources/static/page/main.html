@@ -1,137 +1,183 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>首页--全域旅游</title>
-	<meta name="renderer" content="webkit">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<meta name="apple-mobile-web-app-status-bar-style" content="black">
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<meta name="format-detection" content="telephone=no">
-	<link rel="stylesheet" href="/layui/css/layui.css" media="all" />
-	<link rel="stylesheet" href="/css/main.css" media="all" />
-	<link rel="stylesheet" href="/css/home.css" />
+    <meta charset="utf-8">
+    <title>首页--全域旅游</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" href="/css/main.css" media="all"/>
+    <link rel="stylesheet" href="/css/home.css"/>
     <script type="text/javascript" src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/layui/layui.all.js"></script>
     <script type="text/javascript" src="/js/main.js"></script>
-	<style>
-		.perProgress{width:calc(100% - 20px);margin-left:10px;}
-		.panelWord{text-align: left;margin-left:10px;}
-		.footer { text-align: center;line-height: 44px;border-left: 2px solid #f2f2f2;position: fixed;bottom: 0px;height: 44px;background: #f2f2f2;width: 100%;}
-	</style>
+    <script type="text/javascript" src="/js/echarts.js"></script>
+    <style>
+        .perProgress {
+            width: calc(100% - 20px);
+            margin-left: 10px;
+        }
+
+        .panelWord {
+            text-align: left;
+            margin-left: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            line-height: 44px;
+            border-left: 2px solid #f2f2f2;
+            position: fixed;
+            bottom: 0px;
+            height: 44px;
+            background: #f2f2f2;
+            width: 100%;
+        }
+    </style>
 </head>
 <body class="childrenBody">
-	<div class="allGole">
-		<h2 style="display: inline-block;line-height: 30px;">创建进度测评:</h2><span class="big" id="allScore"></span>
-		<div class="layui-progress layui-progress-big" id="demoPercent" lay-filter="demo" lay-showPercent="true">
-		</div>
-	</div>
-	<div id="mainDiv" class="panel_box row" style="margin-top:15px;margin-bottom:44px;">
-		<div class="panel col">
-			<a href="#" id="module_1">
-				<div class="panel_icon" style="background-color:#17af27;">
-					<i class="layui-icon" data-icon="&#xe628;">&#xe628;</i>
-					<cite class="moduleName"></cite>
-				</div>
-				<div class="panel_word">
-					<p class="itemNum"></p>
-					<p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-					<div class="layui-progress perProgress layui-progress-big perProgress0"  lay-filter="demo0" lay-showPercent="true"></div>
-				</div>
-			</a>
-        </div>
-        <div class="panel col">
-            <a href="#" id="module_2">
-                <div class="panel_icon" style="background-color:#f55438;">
-                    <i class="layui-icon" data-icon="&#xe60f;">&#xe60f;</i>
-                    <cite class="moduleName"></cite>
-                </div>
-                <div class="panel_word">
-                    <p class="itemNum"></p>
-                    <p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-                    <div class="layui-progress perProgress layui-progress-big perProgress1"  lay-filter="demo1" lay-showPercent="true"></div>
-                </div>
-            </a>
-        </div>
-        <div class="panel col">
-            <a href="#" id="module_3">
-                <div class="panel_icon" style="background-color:#f39502;">
-                    <i class="layui-icon" data-icon="&#xe641;">&#xe641;</i>
-                    <cite class="moduleName"></cite>
-                </div>
-                <div class="panel_word">
-                    <p class="itemNum"></p>
-                    <p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-                    <div class="layui-progress perProgress layui-progress-big perProgress2"  lay-filter="demo2" lay-showPercent="true"></div>
-                </div>
-            </a>
-        </div>
-        <div class="panel col">
-            <a href="#" id="module_4">
-                <div class="panel_icon" style="background-color:#10a9e3;">
-                    <i class="layui-icon" data-icon="&#xe600;">&#xe600;</i>
-                    <cite class="moduleName"></cite>
-                </div>
-                <div class="panel_word">
-                    <p class="itemNum"></p>
-                    <p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-                    <div class="layui-progress perProgress layui-progress-big perProgress3"  lay-filter="demo3" lay-showPercent="true"></div>
-                </div>
-            </a>
-        </div>
-        <div class="panel col">
-            <a href="#" id="module_5">
-                <div class="panel_icon" style="background-color:#9b58b7;">
-                    <i class="layui-icon" data-icon="&#xe629;">&#xe629;</i>
-                    <cite class="moduleName"></cite>
-                </div>
-                <div class="panel_word">
-                    <p class="itemNum"></p>
-                    <p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-                    <div class="layui-progress perProgress layui-progress-big perProgress4"  lay-filter="demo4" lay-showPercent="true"></div>
-                </div>
-            </a>
-        </div>
-        <div class="panel col">
-            <a href="#" id="module_6">
-                <div class="panel_icon" style="background-color:#4e5c64;">
-                    <i class="layui-icon" data-icon="&#xe609;">&#xe609;</i>
-                    <cite class="moduleName"></cite>
-                </div>
-                <div class="panel_word">
-                    <p class="itemNum"></p>
-                    <p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-                    <div class="layui-progress perProgress layui-progress-big perProgress5"  lay-filter="demo5" lay-showPercent="true"></div>
-                </div>
-            </a>
-        </div>
-        <div class="panel col">
-            <a href="#" id="module_7">
-                <div class="panel_icon" style="background-color:#f30291;">
-                    <i class="layui-icon" data-icon="&#xe630;">&#xe630;</i>
-                    <cite class="moduleName"></cite>
-                </div>
-                <div class="panel_word">
-                    <p class="itemNum"></p>
-                    <p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-                    <div class="layui-progress perProgress layui-progress-big perProgress6"  lay-filter="demo6" lay-showPercent="true"></div>
-                </div>
-            </a>
-        </div>
-        <div class="panel col" style="margin-bottom:59px;">
-            <a href="#" id="module_8">
-                <div class="panel_icon" style="background-color:#009688;">
-                    <i class="layui-icon" data-icon="&#xe64f;">&#xe64f;</i>
-                    <cite class="moduleName"></cite>
-                </div>
-                <div class="panel_word">
-                    <p class="itemNum"></p>
-                    <p>得分情况：<span class="realPoint"></span>/<span class="totalPoint"></span></p>
-                    <div class="layui-progress perProgress layui-progress-big perProgress7"  lay-filter="demo7" lay-showPercent="true"></div>
-                </div>
-            </a>
-        </div>
-	</div>
+<div style="height: 39px;background: white;"></div>
+<div class="allGole">
+    <span class="allGoleHead">首页</span>
+    <div class="allGoleContent">
+        <h2>创建进度测评</h2>
+        <!--<span class="big" id="allScore"></span>  layui-progress-big  lay-filter="demo"-->
+        <div class="layui-progress layui-progress-big" id="demoPercent" lay-filter="demo" lay-showPercent="true"></div>
+        <!--<div class="layui-progress layui-progress-big" id="demoPercent" lay-showPercent="true"></div>-->
+    </div>
+</div>
+<div id="mainDiv" class="panel_box row">
+    <div class="panel">
+        <a href="#" id="module_1">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe628;">&#xe628;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"><span class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress0"  lay-filter="demo0" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph1"></div>
+        </a>
+    </div>
+    <div class="panel">
+        <a href="#" id="module_2">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe60f;">&#xe60f;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"
+                   style="background-image: linear-gradient(90deg, #F55438 0%, rgba(238,238,238,0.00) 100%);"><span
+                        class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress1"  lay-filter="demo1" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph2"></div>
+        </a>
+    </div>
+    <div class="panel">
+        <a href="#" id="module_3">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe641;">&#xe641;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"
+                   style="background-image: linear-gradient(90deg, #F39502 0%, rgba(238,238,238,0.00) 100%);"><span
+                        class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress2"  lay-filter="demo2" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph3"></div>
+        </a>
+    </div>
+    <div class="panel">
+        <a href="#" id="module_4">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe600;">&#xe600;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"
+                   style="background-image: linear-gradient(90deg, #10A9E3 0%, rgba(238,238,238,0.00) 100%);"><span
+                        class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress3"  lay-filter="demo3" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph4"></div>
+        </a>
+    </div>
+    <div class="panel">
+        <a href="#" id="module_5">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe629;">&#xe629;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"
+                   style="background-image: linear-gradient(90deg, #9B58B7 0%, rgba(238,238,238,0.00) 100%);"><span
+                        class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress4"  lay-filter="demo4" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph5"></div>
+        </a>
+    </div>
+    <div class="panel">
+        <a href="#" id="module_6">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe609;">&#xe609;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"
+                   style="background-image: linear-gradient(90deg, #4E5C64 0%, rgba(238,238,238,0.00) 100%);"><span
+                        class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress5"  lay-filter="demo5" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph6"></div>
+        </a>
+    </div>
+    <div class="panel">
+        <a href="#" id="module_7">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe630;">&#xe630;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"
+                   style="background-image: linear-gradient(90deg, #F30291 0%, rgba(238,238,238,0.00) 100%);"><span
+                        class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress6"  lay-filter="demo6" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph7"></div>
+        </a>
+    </div>
+    <div class="panel" style="margin-bottom:59px;">
+        <a href="#" id="module_8">
+            <div class="panel_icon">
+                <!--<i class="layui-icon" data-icon="&#xe64f;">&#xe64f;</i>-->
+                <cite class="moduleName"></cite>
+                <!--</div>-->
+                <!--<div class="panel_word">-->
+                <p class="itemNum"></p>
+                <p class="realPointDiv"
+                   style="background-image: linear-gradient(90deg, #009688 0%, rgba(238,238,238,0.00) 100%);"><span
+                        class="realPoint"></span>/<span class="totalPoint"></span></p>
+                <!--<div class="layui-progress perProgress layui-progress-big perProgress7"  lay-filter="demo7" lay-showPercent="true"></div>-->
+            </div>
+            <div id="circularGraph8"></div>
+        </a>
+    </div>
+</div>
+<div id="lineDiv" style="width: 100%;height: 300px;"></div>
 </body>
 </html>

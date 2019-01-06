@@ -12,7 +12,10 @@
         <result property="summary" column="Summary"/>
         <result property="no" column="No"/>
         <result property="addr" column="Addr"/>
+        <result property="tel" column="Tel"/>
         <result property="star" column="Star"/>
+        <result property="tableNum" column="TableNum"/>
+        <result property="wcNum" column="WcNum"/>
     </resultMap>
 
 
@@ -27,7 +30,10 @@
             Summary,
             No,
             Addr,
-            Star
+            Star,
+            Tel,
+            TableNum,
+            WcNum
         FROM
             tbl_ordinaryPoi
         WHERE

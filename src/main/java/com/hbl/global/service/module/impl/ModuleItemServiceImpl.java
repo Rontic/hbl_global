@@ -8,6 +8,8 @@ import com.hbl.global.service.base.impl.BaseServiceImpl;
 import com.hbl.global.service.module.ModuleItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,11 +35,13 @@ public class ModuleItemServiceImpl extends BaseServiceImpl implements ModuleItem
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
     public int insertImageList(List<ModuleImage> list) {
         return commonDao.save("ModuleImage.insertList",list);
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
     public int insertRoadList(List<ModuleRoad> list) {
         return commonDao.save("ModuleRoad.insertList",list);
     }

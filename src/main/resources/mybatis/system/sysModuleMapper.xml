@@ -90,4 +90,12 @@
         ORDER BY
             t1.module_id
     </select>
+
+	<select id="selectRealPoint" resultType="java.lang.String">
+		select sum(real_point)
+		from
+		tbl_base_module
+		where
+		parent_id != '0'
+	</select>
 </mapper>

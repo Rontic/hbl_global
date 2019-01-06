@@ -9,6 +9,19 @@ $(function(){
             if(data.success){
                 initDate(data.data);
             }
+            console.log(data)
+            var datas = data.data;
+            var totalPoints = 0;
+            var realPoints = 0;
+            $.each(datas,function (i,list) {
+                totalPoints += list.totalPoint;
+                realPoints += list.realPoint;
+            });
+
+            var percentNumber = (realPoints / totalPoints * 100).toFixed(0) + '%';
+            var percentHtml="<div class='layui-progress-bar layui-bg-green' lay-percent="+percentNumber+" style= width:"+percentNumber+"></div>"+realPoints + ' / '+ totalPoints;
+            $("#demoPercent").append(percentHtml);
+            $("#demoPercent div").text("");
         }
     });
 });
@@ -16,18 +29,18 @@ $(function(){
 function initDate(itemList) {
     var dataHtml = "";
     for(var i=0;i<itemList.length;i++){
+        var dataList = '\''+itemList[i].moduleId+'\',\''+itemList[i].moduleName+'\',\''+itemList[i].totalPoint+'\',\''+itemList[i].realPoint+'\'';
         dataHtml += '<tr>'
             +'<td align="center">'+itemList[i].moduleId+'</td>'
             +'<td align="left" class="moduleName" style="text-align: left;">'+itemList[i].moduleName+'</td>'
             +'<td align="center">'+itemList[i].totalPoint+'</td>'
             +'<td align="center">'+itemList[i].realPoint+'</td>'
             +'<td>'
-            +  '<a class="layui-btn layui-btn-normal layui-btn-mini" onclick="showFile(\''+itemList[i].moduleId+'\')"><i class="layui-icon">&#xe61e;</i>查看相关成果</a>'
+            +  '<a class="layui-btn layui-btn-normal layui-btn-mini" onclick="showFile('+dataList+')"><i class="layui-icon">&#xe61e;</i>查看相关成果</a>'
             +'</td>'
             +'</tr>';
     }
     $(".list_content").append(dataHtml);
-
 
     //静态table 转 datagrid
     layui.use('table', function(){
@@ -81,6 +94,6 @@ function isRealNum(val){
     }
 }
 
-function showFile(moduleId) {
-    window.location.href = "/moduleShow/goFile.do?moduleId="+moduleId+"&realPoint="+$("#hiddenRealPoint").val()+"&totalPoint="+$("#hiddenTotalPoint").val()+"&moduleName="+$("#moduleName").text();
+function showFile(moduleId,moduleName,totalPoint,realPoint) {
+    window.location.href = encodeURI("/moduleShow/goFile.do?moduleId="+moduleId+"&realPoint="+realPoint+"&totalPoint="+totalPoint+"&moduleName="+moduleName);
 }

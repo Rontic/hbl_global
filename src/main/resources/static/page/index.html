@@ -6,6 +6,19 @@
     <title>全域旅游展示平台</title>
     <link rel="stylesheet" href="/layui/css/layui.css">
     <script src="/js/jquery.min.js"></script>
+    <style>
+        .layui-logo{
+            font-size: 20px!important;
+            font-weight: bold;
+            color: #FFFFFF!important;
+        }
+        .mainDate,.mainTime{
+            line-height: 22px;
+            font-size: 10px;
+            color: #FFFFFF;
+            opacity: 0.72;
+        }
+    </style>
 </head>
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
@@ -27,12 +40,16 @@
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
-                <a href="javascript:;">
-                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img">
-                    贤心
+                <p class="mainDate"></p>
+                <p class="mainTime"></p>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:;" style="padding: 0 8px;">
+                    <img src="/images/logo.png" class="layui-nav-img">
+                    超级管理员
                 </a>
             </li>
-            <li class="layui-nav-item"><a href="#" onclick="logout()">退了</a></li>
+            <li class="layui-nav-item"><a href="#" onclick="logout()" style="padding: 0 8px;">退出</a></li>
         </ul>
     </div>
 
@@ -52,13 +69,13 @@
         </div>
     </div>
 
-    <div class="layui-body">
-        <iframe id="childFrame" src="/page/main.html" style="width: 100%;height: 90%"></iframe>
+    <div class="layui-body" style="height: 100%">
+        <iframe id="childFrame" src="/page/main.html" style="width: 100%;height: 99%"></iframe>
     </div>
 
-    <div class="layui-footer">
-        全域旅游
-    </div>
+    <!--<div class="layui-footer">-->
+        <!--全域旅游-->
+    <!--</div>-->
 </div>
 <script src="/layui/layui.js"></script>
 <script>
@@ -69,7 +86,7 @@
             type:"post",
             success:function(data){
                 if(data.success){
-                    data = data.data;
+                    data = data.data.moduleList;
                     var liString = "";
                     for(var i = 0 ;i<data.length;i++){
                         liString += '<li class="layui-nav-item"><a href="#" onclick="goModule(\''+data[i].moduleId+'\',\''+data[i].moduleName+'\')">'+(i+1)+'.'+data[i].moduleName+'</a>';
@@ -98,6 +115,20 @@
     function logout() {
         window.location.href = "/login/logout.do";
     }
+
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = date.getMonth()+1;
+    var dates = date.getDate();
+    var day = date.getDay();
+    var time = date.getHours();
+    var branch = date.getMinutes();
+    var second = date.getSeconds();
+
+    var week = ["星期日","星期一","星期二","星期三","星期四","星期五","星期六"]
+
+    $(".mainDate").text(year+"年"+month+"月"+dates+"日")
+    $(".mainTime").text(week[day]+" "+time+":"+branch+":"+second)
 </script>
 </body>
 </html>

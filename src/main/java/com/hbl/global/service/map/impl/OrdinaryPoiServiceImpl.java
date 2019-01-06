@@ -6,6 +6,8 @@ import com.hbl.global.service.base.impl.BaseServiceImpl;
 import com.hbl.global.service.map.OrdinaryPoiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +25,7 @@ public class OrdinaryPoiServiceImpl extends BaseServiceImpl implements OrdinaryP
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRED,rollbackFor=Exception.class)
     public int insertList(List<OrdinaryPoi> list) {
         return commonDao.save("OrdinaryPoi.insertList",list);
     }
